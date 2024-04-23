@@ -1,0 +1,30 @@
+//Colors variables
+$White: #FBFBFB;
+$DryWhite: #d8d8d8;
+$Black: #1a1a1a;
+$PrimaryColor: rgb(255, 88, 88);
+$Shadow: rgba(0, 0, 0, 0.3);
+
+//Size variables
+$FontSize: 1rem;
+$SmallFontSize: 1rem;
+$HeaderSize: 70px;
+$ScreenMinWidth: 780px;
+$MinRadius: 8px;
+$MaxRadius: 24px;
+$SectionSeparation: 64px;
+
+$FontFamily: Arial, Helvetica, sans-serif;
+
+//Debug mode to show the container borders
+$DebugMode: false;
+
+//Show the content borders on debug mode
+@mixin DebugBorders($Color: red) {
+  @if $DebugMode {
+    border: 1px solid $Color;
+  } 
+  @else {
+    border: none;
+  }
+};

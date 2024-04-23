@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./Styles/Styles.scss";
+import ImgArtwork from "./Images/Artwork.jpg";
+import { Timer } from "./Components/Timer";
 
 function App() {
+  const Song = {
+    Name: "Blue Larimar Music & GRGE - Solo Tú"
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="Banner-Container Centered-Container Flex-Row">
+        <img src={ImgArtwork}/>
+
+        <div className="WaveForm-Container">
+          <p>{Song.Name}</p>
+        </div>
+
+        <div>
+          <p><Timer/></p>
+          <button className="Convencional-Button">Entrar al contest</button>
+        </div>
+      </div>
     </div>
   );
 }

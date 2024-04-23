@@ -1,0 +1,75 @@
+//Class to center elements in the container. Default stack mode is column or vectically
+@mixin Centered-Container() {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &.Flex-Row {
+        flex-direction: row;
+    }
+
+    &.Flex-Column {
+        flex-direction: column;
+    }
+}
+
+.Centered-Container {
+    @include Centered-Container();
+}
+
+//Class to put the text next to the image in a line
+@mixin ImageText-Container() {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: left;
+    @include DebugBorders(green);
+}
+
+//Class to fit the image to the banner container
+.Banner-Container {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+//Container to adjust elements with streched size
+@mixin Grid-Wrap($MinSize: 250px, $Gap: 32px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, $MinSize), 1fr));
+    grid-auto-flow: dense;
+    gap: $Gap;
+}
+
+.Grid-Wrap {
+    @include Grid-Wrap();
+}
+
+//Container to adjust elments with fixed size
+@mixin Flex-Wrap($Gap: 32px) {
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+    gap: $Gap;
+}
+
+.Flex-Wrap {
+    @include Flex-Wrap();
+}
+
+
+.Header-Spacing {
+    height: $HeaderSize;
+}
+
+//Function to change the content styles when the screen size is very small
+@mixin ScreenMinWidth() {
+    @media screen and (max-width: $ScreenMinWidth) {
+        @content
+    }
+};
