@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-export const Timer = () => {
+export const Timer = (props) => {
   const[TimerDays, SetDays] = useState("00");
   const[TimerHours, SetHours] = useState("00");
   const[TimerMinutes, SetMinutes] = useState("00");
@@ -8,7 +8,7 @@ export const Timer = () => {
   let Interval = useRef();
 
   const StartTimer = () => {
-    const CountDownDate = new Date("April 24, 2024 00:00:00").getTime();
+    const CountDownDate = new Date(props.Date).getTime();
 
     Interval = setInterval(() => {
       const Now = new Date().getTime();

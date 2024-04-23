@@ -4,20 +4,20 @@ import { Timer } from "./Components/Timer";
 
 function App() {
   const Song = {
-    Name: "Blue Larimar Music & GRGE - Solo Tú"
+    Name: "Blue Larimar Music (feat. GRGE) - Solo Tú"
   }
 
   return (
     <div className="App">
-      <div class="Banner-Container Centered-Container Flex-Row">
-        <img src={ImgArtwork}/>
+      <div class="Banner-Container">
+        <div class="Image-Container"><img src={ImgArtwork}/></div>
 
         <div className="WaveForm-Container">
-          <p>{Song.Name}</p>
+          <p className="Title">{Song.Name}</p>
         </div>
 
-        <div>
-          <p><Timer/></p>
+        <div className="Counter-Container">
+          <p><Timer Date="April 24, 2024 00:00:00"/></p>
           <button className="Convencional-Button">Entrar al contest</button>
         </div>
       </div>
