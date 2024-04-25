@@ -1,5 +1,8 @@
 @import "./Settings";
 @import "./Base";
-@import "./Behaviors";
-@import "./Appearance";
-@import "./HomePage";
+@import "./Class/Behaviors";
+@import "./Class/Appearance";
+
+@import "./Components/WaveForm";
+
+@import "./Pages/HomePage";
