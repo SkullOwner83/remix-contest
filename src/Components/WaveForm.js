@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState, useRef } from 'react';
+import {  useLocalStorage, FormatTime } from "../Functions";
+
 import WaveSurfer from "wavesurfer.js";
 import ImgPlay from "../Images/Icons/Play.svg";
 import ImgPause from "../Images/Icons/Pause.svg";
@@ -18,18 +20,11 @@ const WaveFormOptions = (ref) => ({
     barGap: 2
 })
 
-//Helper function to format time
-function FormatTime(Seconds) {
-    let date = new Date(0);
-    date.setSeconds(Seconds);
-    return date.toISOString().substr(11, 8);
-}
-
 export const WaveForm = ({ AudioFile, SongName }) => {
     const WaveFormRef = useRef(null);
     const WaveFrom = useRef(null);
     const [Playing, SetPlaying] = useState(false);
-    const [Volume, SetVolume] = useState(0.5);
+    const [Volume, SetVolume] = useLocalStorage("Volume", "0.5");
     const [Paused, SetPaused] = useState(false);
     const [Muted, SetMuted] = useState(false);
     const [Duration, SetDuration] = useState(0);
@@ -47,7 +42,7 @@ export const WaveForm = ({ AudioFile, SongName }) => {
     
         //When WaveSurfer is ready
         WaveFrom.current.on("ready", () => {
-            SetVolume(WaveFrom.current.getVolume());
+            WaveFrom.current.setVolume(Volume);
             SetDuration(WaveFrom.current.getDuration());
             SetFileName(AudioFile.split("/").pop());
         })
@@ -64,8 +59,7 @@ export const WaveForm = ({ AudioFile, SongName }) => {
             WaveFrom.current.destroy();
         };
     }, [AudioFile]);
-
-    //Toggle playback of audio
+    
     const handlePlay = () => {
         SetPlaying(true);
         SetPaused(false);
@@ -88,7 +82,7 @@ export const WaveForm = ({ AudioFile, SongName }) => {
     const handleVolumeChange = (NewVolume) => {
         SetVolume(NewVolume);
         WaveFrom.current.setVolume(NewVolume);
-        SetMuted(NewVolume === 0)
+        SetMuted(NewVolume === 0);
     }
 
     //Toggle between mute and unmute audio
@@ -138,7 +132,7 @@ export const WaveForm = ({ AudioFile, SongName }) => {
 
                 {/* Info of song section */}
                 <div className="Audio-Info">
-                    <p>{FormatTime(CurrenTime)} | {FormatTime(Duration  )}</p>
+                    <p>{FormatTime(CurrenTime)} / {FormatTime(Duration )}</p>
                 </div>
             </div>  
         </div>

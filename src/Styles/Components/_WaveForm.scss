@@ -1,18 +1,21 @@
 .WaveForm-Component {
     display: grid;
     grid-template-rows: auto 1fr auto;
+    height: 200px;
 
-    #WaveForm {
-        grid-row: 2;
-        width: 100%;
-        //height: 80px;
-    }
-
+    //Song title styles
     .Title {
         grid-row: 1;
         font-size: 2rem;
         text-align: left;
         margin-bottom: 8px;
+    }
+    
+    //Song waveform styles
+    #WaveForm {
+        grid-row: 2;
+        width: 100%;
+        @include DebugBorders(green);
     }
 
     .Controls-Container {
@@ -44,7 +47,8 @@
         //Info of song section
         .Audio-Info {
             grid-column: 3;
-            text-align: right;
+            font-size: 20px;
+            text-align: right;            
         }
     }
 }
