@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 import {  useLocalStorage, FormatTime } from "../Functions";
 
 import WaveSurfer from "wavesurfer.js";
+import ImgVolume from "../Images/Icons/Volume.svg";
+import ImgMuted from "../Images/Icons/Muted.svg"
 import ImgPlay from "../Images/Icons/Play.svg";
 import ImgPause from "../Images/Icons/Pause.svg";
 import ImgStop from "../Images/Icons/Stop.svg";
@@ -12,12 +14,16 @@ const WaveFormOptions = (ref) => ({
     waveColor: "#FFFF",
     progressColor: "#389eec",
     cursorColor: "transparent",
-    responsive: true,
-    height: "auto",
-    normalize: false,
+
     backend: "WebAudio",
-    barWidth: 2,
-    barGap: 2
+    responsive: true,
+    normalize: false,
+    dragToSeek: true,
+
+    height: "auto",
+    barWidth: 3,
+    barGap: 0,
+    barRadius: 4,
 })
 
 export const WaveForm = ({ AudioFile, SongName }) => {
@@ -60,22 +66,32 @@ export const WaveForm = ({ AudioFile, SongName }) => {
         };
     }, [AudioFile]);
     
-    const handlePlay = () => {
-        SetPlaying(true);
-        SetPaused(false);
-        WaveFrom.current.play();
-    }
+    const handleControls = (Parameter) => {
+        switch(Parameter) 
+        {
+            case "Play":
+                SetPlaying(true);
+                SetPaused(false);
+                WaveFrom.current.play();
+                break;
 
-    const handlePause = () => {
-        SetPlaying(false);
-        SetPaused(true);
-        WaveFrom.current.pause();
-    }
+            case "Stop":
+                SetPlaying(false);
+                SetPaused(false);
+                WaveFrom.current.stop();
+                break;
 
-    const handleStop = () => {
-        SetPlaying(false);
-        SetPaused(false);
-        WaveFrom.current.stop();
+            case "Pause":
+                SetPlaying(false);
+                SetPaused(true);
+                WaveFrom.current.pause();
+                break;
+
+            case "Mute":
+                SetMuted(!Muted);
+                WaveFrom.current.setVolume(Muted ? Volume : 0);
+                break;
+        }
     }
 
     //Adjust audio volume
@@ -83,12 +99,6 @@ export const WaveForm = ({ AudioFile, SongName }) => {
         SetVolume(NewVolume);
         WaveFrom.current.setVolume(NewVolume);
         SetMuted(NewVolume === 0);
-    }
-
-    //Toggle between mute and unmute audio
-    const handleMute = () => {
-        SetMuted(!Muted);
-        WaveFrom.current.setVolume(Muted ? Volume : 0);
     }
 
     //Increase volume by 10%
@@ -109,7 +119,8 @@ export const WaveForm = ({ AudioFile, SongName }) => {
             <div class="Controls-Container">
                 {/* Volume of song section */}
                 <div class="Volume-Container">
-                    {/* <button onClick={handleMute}></button> */}
+                    <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume }/></button> 
+
                     <input
                         type="range"
                         id="volume"
@@ -120,14 +131,23 @@ export const WaveForm = ({ AudioFile, SongName }) => {
                         value={Muted ? 0 : Volume}
                         onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                     />
-                    {/* <p>Volumen: {Math.round(Volume * 100)}%</p> */}
+
+                    <p>{!Muted ? Math.round(Volume * 100) : 0}%</p>
                 </div>
 
                 {/* Control of song buttons section */}
                 <div class="Buttons-Container Centered-Container Flex-Row">
-                    <button onClick={handleStop}><img src={ImgStop}/></button>
-                    <button onClick={handlePlay} className={Playing ? "Pressed" : ""}><img src={ImgPlay}/></button>
-                    <button onClick={handlePause} className={Paused ? "Pressed" : ""}><img src={ImgPause}/></button>
+                    <button onClick={() => handleControls("Stop")}><img src={ImgStop}/></button>
+
+                    <button onClick={() => handleControls("Play")} 
+                            className={Playing ? "Pressed" : ""}>
+                        <img src={ImgPlay}/>
+                    </button>
+
+                    <button onClick={() => handleControls("Pause")} 
+                            className={Paused ? "Pressed" : ""}>
+                        <img src={ImgPause}/>
+                    </button>
                 </div>
 
                 {/* Info of song section */}

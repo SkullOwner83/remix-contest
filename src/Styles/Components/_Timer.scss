@@ -1,0 +1,22 @@
+.Timer-Container {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+
+    &>div {
+        width: 100px;
+        @include DebugBorders(green);
+
+        .Counter-Text {
+            font-size: 64px;
+            font-weight: bold;        
+            text-shadow: 0 0 10px black;
+        }
+    
+        .Title {
+            font-weight: normal;
+            font-size: $FontSize * 1.2;
+            text-shadow: 0 0 10px black;
+        }
+    }
+}

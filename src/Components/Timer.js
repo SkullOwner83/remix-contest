@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-export const Timer = (props) => {
+export const Timer = ({DueDate}) => {
   const[TimerDays, SetDays] = useState("00");
   const[TimerHours, SetHours] = useState("00");
   const[TimerMinutes, SetMinutes] = useState("00");
@@ -8,7 +8,7 @@ export const Timer = (props) => {
   let Interval = useRef();
 
   const StartTimer = () => {
-    const CountDownDate = new Date(props.Date).getTime();
+    const CountDownDate = new Date(DueDate).getTime();
 
     Interval = setInterval(() => {
       const Now = new Date().getTime();
@@ -40,12 +40,28 @@ export const Timer = (props) => {
     }
   });
 
+  //HTML section
   return (
-    <div>
-      <p>{TimerDays}</p>
-      <p>{TimerHours}</p>
-      <p>{TimerMinutes}</p>
-      <p>{TimerSeconds}</p>
+    <div className="Timer-Container">
+      <div>  
+        <p className="Counter-Text">{TimerDays}</p>
+        <p className="Title">Días</p>
+      </div>
+
+      <div>
+        <p className="Counter-Text">{TimerHours}</p>
+        <p className="Title">Horas</p>
+      </div>
+
+      <div>
+        <p className="Counter-Text">{TimerMinutes}</p>
+        <p className="Title">Minutos</p>
+      </div>
+
+      <div>
+        <p className="Counter-Text">{TimerSeconds}</p>
+        <p className="Title">Segundos</p>
+      </div>
     </div>
   )
 }

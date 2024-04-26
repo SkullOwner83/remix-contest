@@ -36,10 +36,12 @@ main {
             font-size: 2rem;
             text-align: center;
             margin-bottom: $FontSize;
+            color: white;
         }  
 
         p {
             font-size: $FontSize;
+            color: white;
         }
     
         //Add a margin between all paragraphs on articles except the last one

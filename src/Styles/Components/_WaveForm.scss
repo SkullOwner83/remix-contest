@@ -2,6 +2,7 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 200px;
+    font-size: 20px;
 
     //Song title styles
     .Title {
@@ -15,6 +16,7 @@
     #WaveForm {
         grid-row: 2;
         width: 100%;
+        border-radius: 10px;
         @include DebugBorders(green);
     }
 
@@ -27,14 +29,22 @@
         button {
             width: 32px;
             height: 32px;
-            @include Mechanic-Button();
         }
 
         //Volume of song section
         .Volume-Container {
             grid-column: 1;
+            display: flex;
+            align-items: center;
+
+            button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
 
             input[type="range"] {
+                background-color: red;   
                 margin: 0 16px;
             }
         }
@@ -42,12 +52,15 @@
         //Control of song buttons section
         .Buttons-Container {
             grid-column: 2;
+            
+            button {
+                @include Mechanic-Button();
+            }
         }
 
         //Info of song section
         .Audio-Info {
             grid-column: 3;
-            font-size: 20px;
             text-align: right;            
         }
     }

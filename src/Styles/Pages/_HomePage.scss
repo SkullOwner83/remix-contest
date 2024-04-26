@@ -1,18 +1,59 @@
+.Background {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../Images/Banner.png);
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -100;
+}
+
 .Banner-Container {
     width: 100%;
     height: 100vh;
-    background-image: url(../../Images/Banner.png);
+    color: white;
+    padding: 32px 5%;  
 
-    //Black background with transparency to distinguish from the background
-    .Background {
+    .Title-Container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        @include DebugBorders();
+        user-select: none;
+        pointer-events: none;
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+
+        //Remix contest title styles
+        h1 {
+            text-align: center;
+            transform: skew(-20deg);    
+            rotate: -5deg;
+            position: absolute;
+
+            top: 50%;
+            transform: translateY(-80%);
+            z-index: 100;
+            
+            background: linear-gradient(to top, #ef00d3, #FFFF, #00d5ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;            
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+    }
+    
+    .Song-Container {
         display: grid;        
         grid-template-columns: auto 1fr auto;
-        gap: 32px;
-
-        width: 100%;
-        height: auto;
-        background-color: rgba(black, 0.5);        
-        padding: 64px 5%;
+        gap: 32px;   
+        background-color: rgba(black, 0.4);
+        border-radius: 20px;
+        padding: 32px;
 
         //Artwork of song container
         .Image-Container {
@@ -32,14 +73,14 @@
         }
     
         //Date count down container
-        .Counter-Container {
+        .CountDown-Container {
             grid-column: 3;
             width: 200px;
             @include DebugBorders();
         }
     }
 
-    p {
-        color: white;
+    section {
+        margin-top: 32px;    
     }
 }
