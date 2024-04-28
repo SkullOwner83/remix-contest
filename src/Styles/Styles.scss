@@ -3,10 +3,13 @@
 @import "./Base";
 @import "./Class/Behaviors";
 @import "./Class/Appearance";
+@import "./Class/_Effects";
 
 //Components styles
-@import "./Components/WaveForm";
+@import "./Components/Header";
 @import "./Components/Footer";
 @import "./Components/_Timer";
+@import "./Components/WaveForm";
 
+//Pages styles
 @import "./Pages/HomePage";

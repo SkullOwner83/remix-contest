@@ -2,21 +2,25 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 200px;
-    font-size: 20px;
+    font-size: $FontSize;
+    overflow: hidden;
+
 
     //Song title styles
     .Title {
         grid-row: 1;
-        font-size: 2rem;
+        font-size: $BigFontSize;
         text-align: left;
         margin-bottom: 8px;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     
     //Song waveform styles
     #WaveForm {
         grid-row: 2;
         width: 100%;
-        border-radius: 10px;
         @include DebugBorders(green);
     }
 

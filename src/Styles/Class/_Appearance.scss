@@ -1,5 +1,5 @@
 //Styles for convencional buttons
-.Convencional-Button {
+@mixin Convencional-Button() {
     font-size: $FontSize;
     color: $White;
     background-color: $PrimaryColor;
@@ -10,9 +10,13 @@
 
     user-select: none;
     cursor: pointer;
-    //@include Fx-Compact();
 }
 
+.Convencional-Button {
+    @include Convencional-Button();
+}
+
+//Styles for buttons that mantain pressed as mechanical
 @mixin Mechanic-Button() {
     padding: 8px;
     box-shadow: 0 4px 0 gray;
@@ -32,6 +36,34 @@
 
 .Mechanic-Button {
     @include Mechanic-Button();
+}
+
+//Style for the buttons that are inside the container to make a tab control
+@mixin TabButtons-Container {
+    button {
+        width: 200px;
+        @include Convencional-Button();
+        background-color: transparent;
+        border: 2px solid $PrimaryColor;
+        border-radius: 0;
+        backdrop-filter: blur(20px);
+
+        &.Selected {
+            background-color: $PrimaryColor;
+        }
+        
+        &:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        &:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+    }
+}
+
+.TabButtons-Container {
+    @include TabButtons-Container();
 }
 
 //Styles for the cards container with shadow
@@ -88,13 +120,17 @@
     text-align: center;
 }
 
-.Solid-Background {
+@mixin Solid-Background($Color: Whitesmoke) {
     width: 100%;
-    background-color: whitesmoke;
+    background-color: $Color;
     padding: $SectionSeparation 0;
     
     &>section {
         margin-top: 0;
         margin-bottom: 0;
     }
+}
+
+.Solid-Background {
+    @include Solid-Background();
 }

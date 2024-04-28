@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { FormatZeroPadding } from "../Functions.js";
 
 export const Timer = ({DueDate}) => {
   const[TimerDays, SetDays] = useState("00");
@@ -44,22 +45,22 @@ export const Timer = ({DueDate}) => {
   return (
     <div className="Timer-Container">
       <div>  
-        <p className="Counter-Text">{TimerDays}</p>
+        <p className="Counter-Text">{ FormatZeroPadding(TimerDays) }</p>
         <p className="Title">Días</p>
       </div>
 
       <div>
-        <p className="Counter-Text">{TimerHours}</p>
+        <p className="Counter-Text">{ FormatZeroPadding(TimerHours) }</p>
         <p className="Title">Horas</p>
       </div>
 
       <div>
-        <p className="Counter-Text">{TimerMinutes}</p>
+        <p className="Counter-Text">{ FormatZeroPadding(TimerMinutes) }</p>
         <p className="Title">Minutos</p>
       </div>
 
       <div>
-        <p className="Counter-Text">{TimerSeconds}</p>
+        <p className="Counter-Text">{ FormatZeroPadding(TimerSeconds) }</p>
         <p className="Title">Segundos</p>
       </div>
     </div>

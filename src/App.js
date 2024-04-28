@@ -1,13 +1,19 @@
 import "./Styles/Styles.scss";
-import { Home } from "./Pages/Home";
+import { BrowserRouter } from "react-router-dom";
+import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
+import { Home } from "./Pages/Home";
 
 function App() {
   //HTML section
   return (
     <div className="App">
-      <Home/>
-      <Footer/>
+      <BrowserRouter>
+        <Header/>
+        
+        <Home/>
+        <Footer/>
+      </BrowserRouter>
     </div>
   );
 }

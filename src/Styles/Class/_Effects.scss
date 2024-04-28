@@ -1,0 +1,39 @@
+//Effect to move up elements
+@mixin Fx-SlideUp($Quantity: 20px, $Time: 0.3s) {
+    transition: $Time;
+
+    &:hover {
+        transform: translateY(-$Quantity);
+    }
+}
+
+.Fx-Up {
+    @include Fx-SlideUp();
+}
+
+//Effect to reduce the element scale
+@mixin Fx-Compact($Scale: 0.9, $Time: 0.2s) {
+    transition: $Time;
+
+    &:hover {
+        transform: scale($Scale);
+    }
+}
+
+.Fx-Compact {
+    @include Fx-Compact();
+}
+
+//Effect to turn on the color on hover and fade when not
+@mixin Fx-TurnOn-Light($Color: white, $Time: 1s) {
+    transition: $Time;
+
+    &:hover {
+        color: white;
+        transition: 0s;
+    }
+}
+
+.Fx-TurnOn-Light {
+    @include Fx-TurnOn-Light();
+}

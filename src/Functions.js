@@ -34,3 +34,7 @@ export function useLocalStorage(Key, InitialValue) {
     
     return [StoredValue, SetValue];
 }
+
+export function FormatZeroPadding(Value) {
+    return Value < 10 ?  `0${Value}` : `${Value}`;
+}

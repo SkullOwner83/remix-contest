@@ -1,0 +1,28 @@
+header {
+    width: 100%;
+    height: $HeaderSize;
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    padding: 0 5%;      
+    z-index: 100;
+    transition: 1s;
+    
+    &.Activate {
+        background-color: black;
+    }
+
+    li {
+        .Link {
+            color: gray;
+            font-weight: bold;
+            user-select: none;
+            cursor: pointer;
+            @include Fx-TurnOn-Light();
+        }                 
+
+        &:not(:last-child) {
+            margin-right: 16px;
+        }
+    }
+}
