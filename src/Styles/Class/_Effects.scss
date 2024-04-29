@@ -29,7 +29,7 @@
     transition: $Time;
 
     &:hover {
-        color: white;
+        color: $Color;
         transition: 0s;
     }
 }

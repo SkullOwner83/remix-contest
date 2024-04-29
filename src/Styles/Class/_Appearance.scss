@@ -98,17 +98,13 @@
             height: 150px;
             padding: 10%;
             border-radius: 100%;
-            //@include Fx-SlideUp();
+            @include Fx-SlideUp();
 
             img {
                 width: 100%;
                 height: 100%;
                 pointer-events: none;
     
-            }
-
-            &:hover {
-                box-shadow: 0 0 30px $Shadow;
             }
         }
     }

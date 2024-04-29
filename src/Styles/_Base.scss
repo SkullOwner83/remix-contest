@@ -22,8 +22,6 @@ a {
 
 //Define default values to all elements
 main {
-    //min-height: calc(100vh - $HeaderSize);
-
     //Limit the sections width to show the content always on center
     section {
         text-align: justify;
@@ -39,14 +37,18 @@ main {
             color: white;
         }  
 
-        p {
+        p, li {
             font-size: $FontSize;
             color: white;
         }
     
         //Add a margin between all paragraphs on articles except the last one
         article {
-            text-align: justify;
+            text-align: justify;        
+
+            &:not(:last-child) {
+                margin-bottom: $SectionSeparation;
+            }   
 
             p:not(:last-child) {
                 margin-bottom: $FontSize;

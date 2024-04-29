@@ -19,8 +19,7 @@
         color: white;
         justify-content: space-between;
         padding: 16px 5% 32px 5%; 
-        
-        
+             
         .Title-Image {
             height: 150px;
             user-select: none;
@@ -68,18 +67,47 @@
                 @include DebugBorders();
             }
         }
+
+        //Set a margin in small resolution to separate the timer to the button
+        .CountDown-Container {
+            @include ScreenMinHeight(720px)
+            {
+                margin-bottom: 32px;
+            }
+        }
+
+        .EndOfBanner-Button button {
+            min-width: 200px;
+        }
     }
 
     .Main-Background {
         @include Solid-Background(rgba(black, 0.5));          
         min-height: 1000px;
 
-        .Navigate-Buttons {
+        .TabControl-Buttons {
             position: sticky;        
             margin-bottom: $SectionSeparation;
-            top: $HeaderSize;
-            
+            top: $HeaderSize;    
             @include TabButtons-Container();
+        }
+
+        .TabControl-Content > div {
+            display: none;
+
+            li {
+                list-style: decimal;
+            }
+
+            &.Show-Tab {
+                display: inline;
+            }
+        }
+
+        .Points-ToGrade {
+            img {
+                width: 100%;
+            }
         }
     }
 }

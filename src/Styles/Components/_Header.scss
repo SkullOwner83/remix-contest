@@ -2,23 +2,43 @@ header {
     width: 100%;
     height: $HeaderSize;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     position: fixed;
-    padding: 0 5%;      
+    padding: 8px 5%;      
     z-index: 100;
     transition: 1s;
+
+    //Hide navbar logo when the scroll is on top of page
+    .Logo-Container {
+        user-select: none;
+        pointer-events: none;
+
+        img {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            scale: 0;
+        }
+    }
     
+    //Show background and logo navbar when scrolling
     &.Activate {
         background-color: black;
+
+        .Logo-Container img {
+            opacity: 1;
+            scale: 1;
+            transition: 0.5s;
+        }
     }
 
     li {
         .Link {
-            color: gray;
+            color: white;
             font-weight: bold;
             user-select: none;
             cursor: pointer;
-            @include Fx-TurnOn-Light();
+            @include Fx-TurnOn-Light($PrimaryColor);
         }                 
 
         &:not(:last-child) {

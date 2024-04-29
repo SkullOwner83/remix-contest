@@ -2,6 +2,8 @@ import React from "react"
 import { useState } from "react";
 import { Link } from "react-router-dom"
 
+import ImgLogo from "../Images/Logo.png";
+
 export const Header = () => {
     const NavbarLinks = ["INICIO", "RESULTADOS", "NOSOTROS", "CONTACTO"];
     const [Navbar, SetNavbar] = useState(false);
@@ -20,6 +22,8 @@ export const Header = () => {
 
     return (
         <header className={Navbar ? "Activate" : ""}>
+            <div class="Logo-Container"><img src={ImgLogo}/></div>
+            
             {/* Get each element from NavBar array and add it in navigation list menu */}          
             <ul className="Navigation-Container Centered-Container Flex-Row">
                 {
