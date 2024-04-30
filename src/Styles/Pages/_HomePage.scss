@@ -6,7 +6,7 @@
         position: fixed;
         z-index: -100;
 
-        background-image: url(../../Images/Banner.png);
+        background-image: url(../../Images/Gallery/Banner.png);
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -78,6 +78,7 @@
 
         .EndOfBanner-Button button {
             min-width: 200px;
+            @include Fx-Glow();
         }
     }
 
@@ -89,24 +90,53 @@
             position: sticky;        
             margin-bottom: $SectionSeparation;
             top: $HeaderSize;    
-            @include TabButtons-Container();
+            @include ButtonsGroup-Container();
         }
 
-        .TabControl-Content > div {
-            display: none;
-
-            li {
-                list-style: decimal;
-            }
-
-            &.Show-Tab {
-                display: inline;
+        .TabControl-Content {
+            & > div {
+                display: none;
+    
+                li {
+                    list-style: decimal;
+                }
+    
+                &.Show-Tab {
+                    display: inline;
+                }
             }
         }
 
-        .Points-ToGrade {
-            img {
+        .About-Us {
+            @include Grid-Wrap(300px, 64px);
+            
+            .Image-Container {
+                width: 100%;     
+                cursor: pointer;
+                user-select: none;            
+                @include DebugBorders(green);
+                @include Centered-Container();
+
+                img {
+                    width: 80%;
+                    height: 100%;
+                    object-fit:cover;
+                    aspect-ratio: 16/9;
+                    border-radius: 10px;
+                    @include Fx-Glow();
+                }
+            }
+
+            .Logo-Container {
                 width: 100%;
+                height: 64px;
+                margin-top: 32px;
+                @include DebugBorders(green);
+                @include Centered-Container();
+
+                img {
+                    height: 100%;
+                }
             }
         }
     }

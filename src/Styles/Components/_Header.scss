@@ -32,17 +32,24 @@ header {
         }
     }
 
-    li {
-        .Link {
-            color: white;
-            font-weight: bold;
-            user-select: none;
-            cursor: pointer;
-            @include Fx-TurnOn-Light($PrimaryColor);
-        }                 
+    //Navigation options of navbar
+    .Navigation-Container {
+        li {
+            .Link {
+                color: white;
+                font-weight: bold;
+                user-select: none;
+                cursor: pointer;
+                @include Fx-TurnOn-Light($PrimaryColor);
+            }                 
+    
+            &:not(:last-child) {
+                margin-right: 16px;
+            }
+        }
 
-        &:not(:last-child) {
-            margin-right: 16px;
+        @include ScreenMinWidth(900px) {
+            display: none;
         }
     }
 }

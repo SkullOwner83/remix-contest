@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useState, useRef } from 'react';
 import {  useLocalStorage, FormatTime } from "../Functions";
-
 import WaveSurfer from "wavesurfer.js";
+
 import ImgVolume from "../Images/Icons/Volume.svg";
 import ImgMuted from "../Images/Icons/Muted.svg"
 import ImgPlay from "../Images/Icons/Play.svg";

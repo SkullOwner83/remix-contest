@@ -2,10 +2,10 @@ import React from "react"
 import { useState } from "react";
 import { Link } from "react-router-dom"
 
-import ImgLogo from "../Images/Logo.png";
+import ImgLogo from "../Images/Logos/Logo.png";
 
 export const Header = () => {
-    const NavbarLinks = ["INICIO", "RESULTADOS", "NOSOTROS", "CONTACTO"];
+    const NavbarLinks = ["INICIO", "RESULTADOS", "CONTACTO"];
     const [Navbar, SetNavbar] = useState(false);
 
     //check if you have scrolled to the indicated point to show the navbar
@@ -25,15 +25,17 @@ export const Header = () => {
             <div class="Logo-Container"><img src={ImgLogo}/></div>
             
             {/* Get each element from NavBar array and add it in navigation list menu */}          
-            <ul className="Navigation-Container Centered-Container Flex-Row">
-                {
-                    NavbarLinks.map(element => {
-                    return( <li key={element}>
-                                <Link to={"/" + element.toLocaleLowerCase()} className="Link">{element}</Link>
-                            </li>)
-                    })
-                }
-            </ul>
+            <div class="Navitation-Options">
+                <ul className="Navigation-Container Centered-Container Flex-Row">
+                    {
+                        NavbarLinks.map(element => {
+                        return( <li key={element}>
+                                    <Link to={"/" + element.toLocaleLowerCase()} className="Link">{element}</Link>
+                                </li>)
+                        })
+                    }
+                </ul>
+            </div>
         </header>
     )
 }

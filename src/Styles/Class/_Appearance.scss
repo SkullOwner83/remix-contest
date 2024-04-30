@@ -38,18 +38,23 @@
     @include Mechanic-Button();
 }
 
-//Style for the buttons that are inside the container to make a tab control
-@mixin TabButtons-Container {
+//Style for the buttons grouped
+@mixin ButtonsGroup-Container {
     button {
         width: 200px;
-        @include Convencional-Button();
+        font-size: $FontSize;
+        color: $White;
+        padding: 8px;
+        cursor: pointer;
+
         background-color: transparent;
         border: 2px solid $PrimaryColor;
         border-radius: 0;
         backdrop-filter: blur(20px);
 
-        &.Selected {
+        &.Selected {        
             background-color: $PrimaryColor;
+            cursor: default;
         }
         
         &:first-child {
@@ -62,8 +67,8 @@
     }
 }
 
-.TabButtons-Container {
-    @include TabButtons-Container();
+.ButtonsGroup-Container {
+    @include ButtonsGroup-Container();
 }
 
 //Styles for the cards container with shadow

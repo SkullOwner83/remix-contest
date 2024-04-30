@@ -37,3 +37,16 @@
 .Fx-TurnOn-Light {
     @include Fx-TurnOn-Light();
 }
+
+//Effect to generate a glow in control borders
+@mixin Fx-Glow($Color: $SecondaryColor, $Time: 0.3s, $Opacity: 0.8) {
+    transition: $Time;
+
+    &:hover {
+        box-shadow: 0 0 50px rgba($Color, $Opacity);            
+    }
+}
+
+.Fx-Glow {
+    @include Fx-Glow();
+}
