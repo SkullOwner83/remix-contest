@@ -13,7 +13,6 @@ export function useLocalStorage(Key, InitialValue) {
         //Function to get the initial value of state from local storage or set it if not
         try {
             const Item = window.localStorage.getItem(Key);
-            console.log("Se ha cargado");
             return Item ? JSON.parse(Item) : InitialValue;
         }
         catch (Error) {

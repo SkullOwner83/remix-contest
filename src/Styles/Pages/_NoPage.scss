@@ -1,0 +1,17 @@
+.NoFound-Page {
+    //Set static background image 
+    .Background-Page {
+        @include Image-Background(url(../../Images/Gallery/Banner.png));
+    }  
+
+    .Gif-Container {
+        width: 100%;
+        min-height: 100vh;
+        color: white;
+        //padding: 50%;
+
+        img {
+            width: 500px;
+        }
+    }
+}

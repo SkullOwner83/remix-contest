@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./Components/Header";
 import { Footer } from "./Components/Footer";
 import { Home } from "./Pages/Home";
+import { NoPage } from "./Pages/NoPage";
 
 function App() {
   const [CurrentPage, SetCurrentPage] = useState();
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route index element={<Home/>}/>
           <Route path="/inicio" element={<Home/>}/>
+          <Route path="*" element={<NoPage/>}/>
         </Routes>
         
         <Footer/>

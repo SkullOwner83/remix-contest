@@ -39,11 +39,11 @@
 }
 
 //Effect to generate a glow in control borders
-@mixin Fx-Glow($Color: $SecondaryColor, $Time: 0.3s, $Opacity: 0.8) {
+@mixin Fx-Glow($Color: $SecondaryColor, $Expansion: 30px, $Time: 0.3s, $Opacity: 0.6) {
     transition: $Time;
 
     &:hover {
-        box-shadow: 0 0 50px rgba($Color, $Opacity);            
+        box-shadow: 0 0 $Expansion rgba($Color, $Opacity);            
     }
 }
 

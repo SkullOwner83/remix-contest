@@ -49,14 +49,14 @@ export const Home = () => {
     //HTML section
     return (
         <div className="Home-Page">
-            <div class="Background"/>
+            <div className="Background-Page"/>
 
-            <div class="Banner-Container Centered-Container">  
-                <div class="Title-Image"><img src={ImgTitle} alt="Titulo"/></div>
+            <div className="Banner-Container Centered-Container">  
+                <div className="Title-Image"><img src={ImgTitle} alt="Titulo"/></div>
 
-                <div class="Song-Container">
+                <div className="Song-Container">
                     {/* Artwork of song section */}
-                    <div class="Image-Container"><img src={ImgArtwork} alt="Portada de la canción"/></div>
+                    <div className="Image-Container"><img src={ImgArtwork} alt="Portada de la canción"/></div>
                     {/* Waveform of and information of song section */}
                     <div className="WaveForm-Container">
                         <WaveForm AudioFile={Audio} SongName={Contest.SongName}/>
@@ -72,13 +72,13 @@ export const Home = () => {
                     <Timer DueDate={Contest.Date}/>
                 </div>        
 
-                <div class="EndOfBanner-Button">                    
+                <div className="EndOfBanner-Button">                    
                     <button className="Convencional-Button" onClick={() => handleScrollToComponent()}>Ver detalles</button>
                 </div>
             </div>
 
             <main>
-                <div class="Main-Background">
+                <div className="Main-Background">
                     {/* Tabcontrol navigate buttons */}
                     <div className="TabControl-Buttons Centered-Container Flex-Row">
                         <button className={CurrentInfoTab === "Details" ? "Selected" : ""}
@@ -117,8 +117,8 @@ export const Home = () => {
                                 <div>
                                     <article>
                                         <div>
-                                            <a href="https://www.youtube.com/@GRGE" target="Blank" class="Image-Container"><img src={ImgGrge} className="Photo" alt="GRGE foto"/></a>
-                                            <div class="Logo-Container"><img src={ImgGrgeLogo} className="Logo" alt="GRGE logo"/></div>
+                                            <a href="https://www.youtube.com/@GRGE" target="Blank" className="Image-Container"><img src={ImgGrge} className="Photo" alt="GRGE foto"/></a>
+                                            <div className="Logo-Container"><img src={ImgGrgeLogo} className="Logo" alt="GRGE logo"/></div>
                                         </div>
 
                                         <p>Mi nombre es GRGE, Soy DJ y Productor mexicano que tambien ama hacer videos para YouTube.</p>
@@ -131,8 +131,8 @@ export const Home = () => {
                                 <div>
                                     <article>
                                         <div>
-                                            <a href="https://www.youtube.com/@BlueLarimarMusic" target="Blank" class="Image-Container"><img src={ImgBlueLarimar} className="Photo" alt="Blue Larimar foto"/></a>
-                                            <div class="Logo-Container"><img src={ImgBlueLarimarLogo} alt="Blue Larimar logo"/></div>
+                                            <a href="https://www.youtube.com/@BlueLarimarMusic" target="Blank" className="Image-Container"><img src={ImgBlueLarimar} className="Photo" alt="Blue Larimar foto"/></a>
+                                            <div className="Logo-Container"><img src={ImgBlueLarimarLogo} alt="Blue Larimar logo"/></div>
                                         </div>
 
                                         <p>Blue Larimar Music (Arlén): productora, compositora, artista y youtuber de República Dominicana.</p>
@@ -167,22 +167,22 @@ export const Home = () => {
 
                                 <div className="Flex-Wrap Graphics">
                                     <div>
-                                        <div class="Image-Container"><img src={ImgMixMaster} alt="Mezcla y Master"/></div>
+                                        <div className="Image-Container"><img src={ImgMixMaster} alt="Mezcla y Master"/></div>
                                         <p>Mecla y masterización</p>
                                     </div>
 
                                     <div>
-                                        <div class="Image-Container"><img src={ImgCreativity} alt="Creatividad"/></div>
+                                        <div className="Image-Container"><img src={ImgCreativity} alt="Creatividad"/></div>
                                         <p>Nivel de creatividad</p>
                                     </div>
 
                                     <div>
-                                        <div class="Image-Container"><img src={ImgComposition} alt="Composición"/></div>
+                                        <div className="Image-Container"><img src={ImgComposition} alt="Composición"/></div>
                                         <p>Composición musical</p>
                                     </div>
 
                                     <div>
-                                        <div class="Image-Container"><img src={ImgSoundChoice} alt="Elección de sonidos"/></div>
+                                        <div className="Image-Container"><img src={ImgSoundChoice} alt="Elección de sonidos"/></div>
                                         <p>Elección de sonidos</p>
                                     </div>
                                 </div>

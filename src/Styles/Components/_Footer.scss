@@ -3,8 +3,21 @@ footer {
     height: 64px;
     background-color: black;
     color: white;
+    padding: 0 5%;
 
-    span {
-        color: gray;
+    .Copyright-Container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+
+        .Opaque-Text, a {
+            color: gray;
+        }
+    
+        a {
+            text-decoration: none;
+            @include Fx-TurnOn-Light();
+        }
     }
 }

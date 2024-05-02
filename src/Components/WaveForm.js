@@ -9,23 +9,6 @@ import ImgPlay from "../Images/Icons/Play.svg";
 import ImgPause from "../Images/Icons/Pause.svg";
 import ImgStop from "../Images/Icons/Stop.svg";
 
-const WaveFormOptions = (ref) => ({
-    container: ref,
-    waveColor: "#FFFF",
-    progressColor: "#389eec",
-    cursorColor: "transparent",
-
-    backend: "WebAudio",
-    responsive: true,
-    normalize: false,
-    dragToSeek: true,
-
-    height: "auto",
-    barWidth: 3,
-    barGap: 0,
-    barRadius: 4,
-})
-
 export const WaveForm = ({ AudioFile, SongName }) => {
     const WaveFormRef = useRef(null);
     const WaveFrom = useRef(null);
@@ -35,22 +18,39 @@ export const WaveForm = ({ AudioFile, SongName }) => {
     const [Muted, SetMuted] = useState(false);
     const [Duration, SetDuration] = useState(0);
     const [CurrenTime, SetCurrentTime] = useState(0);
-    const [FileName, SetFileName] = useState("");
+
+    //Waveform audio configuration
+    const WaveConfig = () => ({
+        container: WaveFormRef.current,
+        url: AudioFile,
+        waveColor: "#FFFF",
+        progressColor: "#389eec",
+        cursorColor: "transparent",
+
+        backend: "WebAudio",
+        responsive: true,
+        normalize: false,
+        dragToSeek: true,
+        autoplay: false,
+        hideScrollbar: true,
+        autoScroll: true,
+
+        width: "auto",
+        height: "auto",
+        barWidth: 3,
+        barRadius: 4,
+        barGap: 0
+    })
 
     //Initialize WaveSurfer and set up event listeners
     useEffect(() => {
-        //Create WaveSurfer instance with options
-        const Options = WaveFormOptions(WaveFormRef.current);
-        WaveFrom.current = WaveSurfer.create(Options);
+        //Create WaveSurfer instance with previous configuration
+        WaveFrom.current = WaveSurfer.create(WaveConfig());
     
-        //Load the audio file
-        WaveFrom.current.load(AudioFile);
-    
-        //When WaveSurfer is ready
+        //Set the volume and duration state, when the WaveSurfer is ready
         WaveFrom.current.on("ready", () => {
             WaveFrom.current.setVolume(Volume);
             SetDuration(WaveFrom.current.getDuration());
-            SetFileName(AudioFile.split("/").pop());
         })
 
         //Update current time in state as audio plays
@@ -64,8 +64,9 @@ export const WaveForm = ({ AudioFile, SongName }) => {
             WaveFrom.current.un("ready");
             WaveFrom.current.destroy();
         };
-    }, [AudioFile]);
+    }, []);
     
+    //Function to control the playing state of the song
     const handleControls = (Parameter) => {
         switch(Parameter) 
         {
@@ -91,6 +92,8 @@ export const WaveForm = ({ AudioFile, SongName }) => {
                 SetMuted(!Muted);
                 WaveFrom.current.setVolume(Muted ? Volume : 0);
                 break;
+
+            default: return;
         }
     }
 
@@ -116,10 +119,10 @@ export const WaveForm = ({ AudioFile, SongName }) => {
             <p className="Title">{SongName}</p>
             <div id="WaveForm" ref={WaveFormRef}/>
 
-            <div class="Controls-Container">
+            <div className="Controls-Container">
                 {/* Volume of song section */}
-                <div class="Volume-Container">
-                    <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume }/></button> 
+                <div className="Volume-Container">
+                    <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume } alt="Control de columen"/></button> 
 
                     <input
                         type="range"
@@ -136,23 +139,26 @@ export const WaveForm = ({ AudioFile, SongName }) => {
                 </div>
 
                 {/* Control of song buttons section */}
-                <div class="Buttons-Container Centered-Container Flex-Row">
-                    <button onClick={() => handleControls("Stop")}><img src={ImgStop}/></button>
+                <div className="Buttons-Container Centered-Container Flex-Row">
+                    <button onClick={() => handleControls("Stop")}><img src={ImgStop} alt="Control de parar"/></button>
 
                     <button onClick={() => handleControls("Play")} 
                             className={Playing ? "Pressed" : ""}>
-                        <img src={ImgPlay}/>
+                        <img src={ImgPlay} alt="Control de reproducción"/>
                     </button>
 
                     <button onClick={() => handleControls("Pause")} 
                             className={Paused ? "Pressed" : ""}>
-                        <img src={ImgPause}/>
+                        <img src={ImgPause} alt="Control de pausa"/>
                     </button>
                 </div>
 
                 {/* Info of song section */}
                 <div className="Audio-Info">
-                    <p>{FormatTime(CurrenTime)} / {FormatTime(Duration )}</p>
+                    <p>
+                        <span className="CurrentTime-Container">{FormatTime(CurrenTime)}</span> 
+                        <span className="Duration-Container"> / {FormatTime(Duration )}</span>
+                    </p>
                 </div>
             </div>  
         </div>

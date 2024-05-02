@@ -121,6 +121,7 @@
     text-align: center;
 }
 
+//Set a solid color as background
 @mixin Solid-Background($Color: Whitesmoke) {
     width: 100%;
     background-color: $Color;
@@ -134,4 +135,21 @@
 
 .Solid-Background {
     @include Solid-Background();
+}
+
+//Set static background image 
+@mixin Image-Background($Image: none) {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -100;
+
+    background-image: $Image;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+} 
+
+.Image-Background {
+    @include Image-Background();
 }

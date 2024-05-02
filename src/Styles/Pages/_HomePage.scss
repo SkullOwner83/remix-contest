@@ -1,21 +1,13 @@
 .Home-Page {
     //Set static background image 
-    .Background {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: -100;
-
-        background-image: url(../../Images/Gallery/Banner.png);
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+    .Background-Page {
+        @include Image-Background(url(../../Images/Gallery/Banner.png));
     }    
     
     //Presentation content as banner of page
     .Banner-Container {
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         color: white;
         justify-content: space-between;
         padding: 16px 5% 32px 5%; 
@@ -30,25 +22,36 @@
                 width: 100%;
                 height: 100%;
             }
+
+            @include ScreenMinWidth(500px) {
+                height: 100px;
+            }
         }
         
         //Artwork and waveform song container
         .Song-Container {
-            display: grid;        
-            grid-template-columns: auto 1fr auto;
-            gap: 32px;
+            display: flex;
+            flex-flow: row;
             width: 100%;
-            
+            gap: 32px;
+                        
             background-color: rgba(black, 0.5);
             border-radius: 20px;
             padding: 32px;
+            transition: 1s;
+
+            @include ScreenMinWidth(1200px) {
+                flex-wrap: wrap;
+            }
     
             //Artwork of song container
             .Image-Container {
-                grid-column: 1;
                 width: 200px;
-                @include DebugBorders();
-        
+                flex-shrink: 0;
+                @include DebugBorders();    
+
+                margin: 0 auto;
+
                 img {
                     width: 100%;
                 }
@@ -56,15 +59,19 @@
         
             //Waveform and song info container
             .WaveForm-Container {
-                grid-column: 2;
+                flex-grow: 1;
                 @include DebugBorders();
             }
         
             //Date count down container
             .CountDown-Container {
-                grid-column: 3;
                 width: 200px;
+                flex-shrink: 0;
                 @include DebugBorders();
+
+                @include ScreenMinWidth(1200px) {
+                    display: none;
+                }
             }
         }
 
@@ -82,6 +89,7 @@
         }
     }
 
+    //Body information section
     .Main-Background {
         @include Solid-Background(rgba(black, 0.5));          
         min-height: 1000px;
@@ -91,6 +99,10 @@
             margin-bottom: $SectionSeparation;
             top: $HeaderSize;    
             @include ButtonsGroup-Container();
+
+            button:not(.Selected) {
+                @include Fx-Glow();
+            }
         }
 
         .TabControl-Content {

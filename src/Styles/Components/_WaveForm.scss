@@ -2,17 +2,20 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 200px;
-    font-size: $FontSize;
-    overflow: hidden;
+    font-size: 1.3rem;    
 
+    @include ScreenMinWidth(500px) {
+        height: 150px;
+    }
 
     //Song title styles
     .Title {
         grid-row: 1;
-        font-size: $BigFontSize;
+        font-size: 2rem;
         text-align: left;
         margin-bottom: 8px;
 
+        overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -27,8 +30,8 @@
     .Controls-Container {
         display: grid;
         grid-row: 3;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin-top: 16px; 
+        grid-template-columns: 1fr 1fr 1fr;        
+        margin-top: 16px;        
 
         button {
             width: 32px;
@@ -40,6 +43,7 @@
             grid-column: 1;
             display: flex;
             align-items: center;
+            position: relative;
 
             button {
                 background-color: transparent;
@@ -62,6 +66,10 @@
                     border-radius: 100%;
                     user-select: none;
                 }
+
+                @include ScreenMinWidth(800px) {
+                    display: none;
+                }
             }
         }
 
@@ -78,6 +86,12 @@
         .Audio-Info {
             grid-column: 3;
             text-align: right;            
+
+            .Duration-Container {
+                @include ScreenMinWidth(800px) {
+                    display: none;
+                }
+            }
         }
     }
 }

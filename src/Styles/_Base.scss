@@ -4,6 +4,7 @@ body {
       'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
 }
 
 * {
@@ -20,6 +21,16 @@ a {
     text-decoration: none;
 }
 
+html {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 500px) {
+    html {
+        font-size: 12px;
+    }
+}
+
 //Define default values to all elements
 main {
     //Limit the sections width to show the content always on center
@@ -31,14 +42,14 @@ main {
 
         //Definine a single size to all titles
         h1, h2, h3, h4, h5, h6 {
-            font-size: $BigFontSize;
+            font-size: 2rem;
             text-align: center;
             margin-bottom: $FontSize;
             color: white;
         }  
 
         p, li {
-            font-size: $FontSize;
+            font-size: 1.3rem;
             color: white;
         }
     
@@ -63,7 +74,7 @@ main {
             }
 
             input[type=text], textarea {
-                font-size: $SmallFontSize;
+                font-size: 1rem;
                 padding: 8px 16px;
                 margin-bottom: 16px;
             }
