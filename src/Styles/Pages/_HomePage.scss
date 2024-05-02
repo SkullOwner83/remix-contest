@@ -91,8 +91,9 @@
 
     //Body information section
     .Main-Background {
-        @include Solid-Background(rgba(black, 0.5));          
+        width: 100%;
         min-height: 1000px;
+        @include Solid-Background(rgba(black, 0.6));          
 
         .TabControl-Buttons {
             position: sticky;        
@@ -118,7 +119,7 @@
                 }
             }
         }
-
+    
         .About-Us {
             @include Grid-Wrap(300px, 64px);
             

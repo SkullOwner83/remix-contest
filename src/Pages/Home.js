@@ -18,7 +18,7 @@ import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
 export const Home = () => {
     const Contest = {
         SongName: "Blue Larimar Music & GRGE - Solo Tú",
-        Date: "April 30, 2024 21:00:00"
+        Date: "June 3, 2024 21:00:00"
     }
 
     const [CurrentInfoTab, SetCurrentInfoTab] = useState("Details");
@@ -89,12 +89,7 @@ export const Home = () => {
                         <button className={CurrentInfoTab === "Rules" ? "Selected" : ""}
                                 onClick={() => handleSelectSection("Rules")}>
                             Reglas
-                        </button>
-                        
-                        <button className={CurrentInfoTab === "Prizes" ? "Selected" : ""}
-                                onClick={() => handleSelectSection("Prizes")}>
-                            Premios
-                        </button>
+                        </button>                    
 
                         <button className={CurrentInfoTab === "Resources" ? "Selected" : ""}
                                 onClick={() => handleSelectSection("Resources")}>
@@ -105,11 +100,12 @@ export const Home = () => {
                     {/* Section that contain the infor of each tab */}
                     <section className="TabControl-Content" ref={TabControl}>
                         <div className="TabContent-Details">
-                            <h1>Detalles</h1>
 
                             <article>
-                                <p>Como celebración del aniversario del lanzamiento de "Solo tú", se ha decidido organizar este Remix contest. Este es uno de los temas del album "Vinilia" de Blue Larimar Music, canción en colaboración con el dj productor GRGE.</p>
-                                <p>Solo tú, es un tema del genero synthwave influenciado por los intros de anime.</p>
+                                <h1>Detalles</h1>
+                                <p><strong>“Sólo Tú”</strong> es un tema musical de género Synthpop que te lleva de vuelta a los nostálgicos sonidos de la década de los 80’s. Se trata de la primera colaboración entre <strong>GRGE</strong> y <strong>Blue Larimar Music</strong>, donde Blue Larimar Music ha dado la voz principal para este romántico y pegajoso tema.</p>
+                                <hr/>
+                                <p className="Title">Los 5 mejores remixes formarán parte del <strong>EP oficial de “Sólo Tú”</strong>, mismo que se estará subiendo a los canales de GRGE y Blue Larimar Music.</p>
                             </article>
 
                             <div className="About-Us Grid-Wrap">
