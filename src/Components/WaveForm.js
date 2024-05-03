@@ -9,7 +9,7 @@ import ImgPlay from "../Images/Icons/Play.svg";
 import ImgPause from "../Images/Icons/Pause.svg";
 import ImgStop from "../Images/Icons/Stop.svg";
 
-export const WaveForm = ({ AudioFile, SongName }) => {
+export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
     const WaveFormRef = useRef(null);
     const WaveFrom = useRef(null);
     const [Playing, SetPlaying] = useState(false);
@@ -114,53 +114,67 @@ export const WaveForm = ({ AudioFile, SongName }) => {
         handleVolumeChange(Math.max(Volume - 0.1, 0));
     }
 
-    return (
-        <div className="WaveForm-Component">
-            <p className="Title">{SongName}</p>
-            <div id="WaveForm" ref={WaveFormRef}/>
+    if (!Simple) {
+        //Normal waveform component render
+        return (
+            <div className="WaveForm-Component">
+                <p className="Title">{AudioName}</p>
+                <div id="WaveForm" ref={WaveFormRef}/>
 
-            <div className="Controls-Container">
-                {/* Volume of song section */}
-                <div className="Volume-Container">
-                    <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume } alt="Control de columen"/></button> 
+                <div className="Controls-Container">
+                    {/* Volume of song section */}
+                    <div className="Volume-Container">
+                        <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume } alt="Control de columen"/></button> 
 
-                    <input
-                        type="range"
-                        id="volume"
-                        name="volume"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={Muted ? 0 : Volume}
-                        onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-                    />
+                        <input
+                            type="range"
+                            id="volume"
+                            name="volume"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={Muted ? 0 : Volume}
+                            onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                        />
 
-                    <p>{!Muted ? Math.round(Volume * 100) : 0}%</p>
+                        <p>{!Muted ? Math.round(Volume * 100) : 0}%</p>
+                    </div>
+
+                    {/* Control of song buttons section */}
+                    <div className="Buttons-Container Centered-Container Flex-Row">
+                        <button onClick={() => handleControls("Stop")}><img src={ImgStop} alt="Control de parar"/></button>
+
+                        <button onClick={() => handleControls("Play")} 
+                                className={Playing ? "Pressed" : ""}>
+                            <img src={ImgPlay} alt="Control de reproducción"/>
+                        </button>
+
+                        <button onClick={() => handleControls("Pause")} 
+                                className={Paused ? "Pressed" : ""}>
+                            <img src={ImgPause} alt="Control de pausa"/>
+                        </button>
+                    </div>
+
+                    {/* Info of song section */}
+                    <div className="Audio-Info">
+                        <p>
+                            <span className="CurrentTime-Container">{FormatTime(CurrenTime)}</span> 
+                            <span className="Duration-Container"> / {FormatTime(Duration )}</span>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+        )
+    } else {
+        //Simple waveform component render
+        return(
+            <div className="SimpleWaveForm-Container">
+                <button className="Play-Button"><img src={ImgPlay}/></button>
+                <div>
+                    <p>{AudioName}</p>
+                    <div id="WaveForm" ref={WaveFormRef}/>
                 </div>
-
-                {/* Control of song buttons section */}
-                <div className="Buttons-Container Centered-Container Flex-Row">
-                    <button onClick={() => handleControls("Stop")}><img src={ImgStop} alt="Control de parar"/></button>
-
-                    <button onClick={() => handleControls("Play")} 
-                            className={Playing ? "Pressed" : ""}>
-                        <img src={ImgPlay} alt="Control de reproducción"/>
-                    </button>
-
-                    <button onClick={() => handleControls("Pause")} 
-                            className={Paused ? "Pressed" : ""}>
-                        <img src={ImgPause} alt="Control de pausa"/>
-                    </button>
-                </div>
-
-                {/* Info of song section */}
-                <div className="Audio-Info">
-                    <p>
-                        <span className="CurrentTime-Container">{FormatTime(CurrenTime)}</span> 
-                        <span className="Duration-Container"> / {FormatTime(Duration )}</span>
-                    </p>
-                </div>
-            </div>  
-        </div>
-    )
+            </div>
+        );
+    }
 }

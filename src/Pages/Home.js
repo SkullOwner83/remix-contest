@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Timer } from "../Components/Timer";
 import { WaveForm } from "../Components/WaveForm";
-import Audio from "../Sounds/Solo tu.mp3";
+import SndMusic from "../Sounds/Solo tu.mp3";
+import SndBassline from "../Sounds/Bassline.wav";
+import SndChords from "../Sounds/Chords.wav";
+import SndGuitar from "../Sounds/Guitar.wav";
+import SndOrchHit from "../Sounds/Orch Hit.wav";
+import SndVocal from "../Sounds/Vocal.wav";
 
 import ImgTitle from "../Images/Logos/Isologo.png";
 import ImgArtwork from "../Images/Gallery/Artwork.jpg";
@@ -61,11 +66,11 @@ export const Home = () => {
                     <div className="Image-Container"><img src={ImgArtwork} alt="Portada de la canción"/></div>
                     {/* Waveform of and information of song section */}
                     <div className="WaveForm-Container">
-                        <WaveForm AudioFile={Audio} SongName={Contest.SongName}/>
+                        <WaveForm AudioFile={SndMusic} AudioName={Contest.SongName}/>
                     </div>
                     {/* Count down and entry button section */}
-                    <div className="CountDown-Container Centered-Container">
-                        <button className="Convencional-Button">Entrar al contest</button>
+                    <div className="CountDown-Container Centered-Container">                
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button">Enviar Remix</a>
                     </div>
                 </div>
 
@@ -208,13 +213,26 @@ export const Home = () => {
                             </article>
                         </div>
 
+                        {/* Contest resources section */}
                         <div className="TabContent-Resources">
-                            <h1>Recursos</h1>
-                            <p>Tonalidad: Re menor / Dm</p>
-                            <p>Velocidad: 150 BPM</p>
+                            <article>
+                                <h1>Recursos</h1>
+                                <div className="Centered-Container">
+                                    <p className="Title">Tonalidad: Re menor / Dm, Velocidad: 150 BPM</p>
+                                </div>
+                            </article>
+
+                            {/* Song stems containers */}
+                            <div className="Stems-Waveform Flex-Wrap">
+                                <div><WaveForm AudioFile={SndBassline} AudioName="Bassline" Simple="true"/></div>
+                                <div><WaveForm AudioFile={SndChords} AudioName="Chords" Simple="true"/></div>
+                                <div><WaveForm AudioFile={SndGuitar} AudioName="Guitar" Simple="true"/></div>
+                                <div><WaveForm AudioFile={SndOrchHit} AudioName="Orchestral hit" Simple="true"/></div>
+                                <div><WaveForm AudioFile={SndVocal} AudioName="Vocal" Simple="true"/></div>
+                            </div>
 
                             <div className="Centered-Container">
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" className="Convencional-Button">Enviar demo</a>
+                                <a href="#" target="Blank" className="Convencional-Button">Descargar Stems</a>
                             </div>
                         </div>
                     </section>

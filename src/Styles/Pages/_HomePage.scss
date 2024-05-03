@@ -123,10 +123,6 @@
                     list-style: decimal;
                     list-style-position: inside;
                 }
-
-                .Bases-List {
-                    //padding: 0 30%;
-                }
     
                 &.Show-Tab {
                     display: inline;
@@ -163,6 +159,16 @@
 
                 img {
                     height: 100%;
+                }
+            }
+        }
+
+        .TabContent-Resources {
+            .Stems-Waveform {
+                margin-bottom: $SectionSeparation;
+                div {
+                    width: 100%;
+                    max-width: 400px;
                 }
             }
         }
