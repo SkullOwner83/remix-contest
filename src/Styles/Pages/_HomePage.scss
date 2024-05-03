@@ -13,9 +13,10 @@
         padding: 16px 5% 32px 5%; 
              
         .Title-Image {
-            height: 150px;
+            height: 12rem;
             user-select: none;
             pointer-events: none;
+            transition: 0.5s;
             @include DebugBorders();
             
             img {
@@ -23,8 +24,8 @@
                 height: 100%;
             }
 
-            @include ScreenMinWidth(500px) {
-                height: 100px;
+            @include ScreenMinHeight(750px) {
+                height: 8rem;
             }
         }
         
@@ -46,8 +47,10 @@
     
             //Artwork of song container
             .Image-Container {
-                width: 200px;
+                //width: 200px;
+                width: 15rem;
                 flex-shrink: 0;
+                transition: 0.5s;
                 @include DebugBorders();    
 
                 margin: 0 auto;
@@ -65,7 +68,7 @@
         
             //Date count down container
             .CountDown-Container {
-                width: 200px;
+                width: 15rem;
                 flex-shrink: 0;
                 @include DebugBorders();
 
@@ -79,13 +82,12 @@
         .CountDown-Container {
             @include ScreenMinHeight(720px)
             {
-                margin-bottom: 32px;
+                margin-bottom: 2.5rem;
             }
         }
 
         .EndOfBanner-Button button {
-            min-width: 200px;
-            @include Fx-Glow();
+            min-width: 15rem;
         }
     }
 
@@ -93,16 +95,23 @@
     .Main-Background {
         width: 100%;
         min-height: 1000px;
-        @include Solid-Background(rgba(black, 0.6));          
+        @include Solid-Background(rgba(black, 0.6));   
+        @include Centered-Container();
+        justify-content: start;
 
         .TabControl-Buttons {
             position: sticky;        
             margin-bottom: $SectionSeparation;
-            top: $HeaderSize;    
+            padding: 0 10%;
+            top: 0;
             @include ButtonsGroup-Container();
 
             button:not(.Selected) {
                 @include Fx-Glow();
+            }
+
+            @include ScreenMinWidth(500px) {
+                padding: 0;
             }
         }
 
@@ -112,6 +121,11 @@
     
                 li {
                     list-style: decimal;
+                    list-style-position: inside;
+                }
+
+                .Bases-List {
+                    //padding: 0 30%;
                 }
     
                 &.Show-Tab {

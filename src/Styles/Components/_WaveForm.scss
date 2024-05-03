@@ -1,11 +1,11 @@
 .WaveForm-Component {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    height: 200px;
+    height: 15rem;
     font-size: 1.3rem;    
 
     @include ScreenMinWidth(500px) {
-        height: 150px;
+        height: 11rem;
     }
 
     //Song title styles
@@ -27,15 +27,16 @@
         @include DebugBorders(green);
     }
 
+    //Playback controls styles
     .Controls-Container {
-        display: grid;
         grid-row: 3;
+        display: grid;
         grid-template-columns: 1fr 1fr 1fr;        
-        margin-top: 16px;        
+        margin-top: 16px;  
 
         button {
-            width: 32px;
-            height: 32px;
+            width: 2.5rem;
+            height: 2.5rem;
         }
 
         //Volume of song section

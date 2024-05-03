@@ -10,6 +10,7 @@
 
     user-select: none;
     cursor: pointer;
+    @include Fx-Glow();
 }
 
 .Convencional-Button {
@@ -18,7 +19,7 @@
 
 //Styles for buttons that mantain pressed as mechanical
 @mixin Mechanic-Button() {
-    padding: 8px;
+    padding: 0.6rem;
     box-shadow: 0 4px 0 gray;
     transform: translateY(-4px);
     cursor: pointer;
@@ -40,8 +41,11 @@
 
 //Style for the buttons grouped
 @mixin ButtonsGroup-Container {
+    width: 100%;
+    display: flex;
+
     button {
-        width: 200px;
+        flex-grow: 1;
         font-size: $FontSize;
         color: $White;
         padding: 8px;
@@ -117,7 +121,6 @@
 
 .Title {
     font-size: 2rem;
-    //font-weight: bold;
     text-align: center;
 }
 

@@ -22,7 +22,13 @@ a {
 }
 
 html {
-    font-size: 14px;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1500px) {
+    html {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -61,7 +67,7 @@ main {
                 margin-bottom: $SectionSeparation;
             }   
 
-            p:not(:last-child) {
+            p:not(:last-child), hr {
                 margin-bottom: $FontSize;
             }
         }

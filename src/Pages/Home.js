@@ -1,19 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Timer } from "../Components/Timer";
 import { WaveForm } from "../Components/WaveForm";
-import ImgTitle from "../Images/Logos/Isologo.png";
-import Audio from "../Solo tu.mp3";
+import Audio from "../Sounds/Solo tu.mp3";
 
+import ImgTitle from "../Images/Logos/Isologo.png";
 import ImgArtwork from "../Images/Gallery/Artwork.jpg";
 import ImgGrge from "../Images/Gallery/GRGE.jpg"
 import ImgBlueLarimar from "../Images/Gallery/Blue Larimar Music.jpg";
+import ImgAcapella from "../Images/Illustrations/Acapella.svg";
 import ImgMixMaster from "../Images/Illustrations/Mix and Master.svg";
 import ImgCreativity from "../Images/Illustrations/Creativity.svg";
-import ImgComposition from "../Images/Illustrations/Musical Composition.svg";
-import ImgSoundChoice from "../Images/Illustrations/Sound Choice.svg";
-
+import ImgComposition from "../Images/Illustrations/Composition.svg";
+import ImgEstructure from "../Images/Illustrations/Estructure.svg";
 import ImgGrgeLogo from "../Images/Logos/GRGE.png";
 import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
+
 
 export const Home = () => {
     const Contest = {
@@ -22,19 +23,12 @@ export const Home = () => {
     }
 
     const [CurrentInfoTab, SetCurrentInfoTab] = useState("Details");
-    const [EndOfContest, SetEndOfContest] = useState(false);
-    const TabControl = useRef(null);
-
-    function handleSelectSection(Section) {
-        SetCurrentInfoTab(Section);
-    }
-    function handleScrollToComponent() {
-        TabControl.current.scrollIntoView({ behaviors: "smooth", block: "start" });
-    }
+    const TabControlRef = useRef(null);
+    const TabContentRef = useRef(null);
 
     useEffect(() => {
         //Get all first childs of tabcontrol and save it a list
-        const TabsContent = Array.from(TabControl.current.querySelectorAll("& > div"));
+        const TabsContent = Array.from(TabContentRef.current.querySelectorAll("& > div"));
 
         //Iterate over each container and remove the show content class and it in case the class name is the same as current tab
         TabsContent.forEach(Element => {
@@ -45,6 +39,14 @@ export const Home = () => {
             }
         });
     }, [CurrentInfoTab])
+
+    function handleSelectSection(Section) {
+        SetCurrentInfoTab(Section);
+    }
+    
+    function handleScrollToComponent() {
+        TabControlRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
     //HTML section
     return (
@@ -80,10 +82,10 @@ export const Home = () => {
             <main>
                 <div className="Main-Background">
                     {/* Tabcontrol navigate buttons */}
-                    <div className="TabControl-Buttons Centered-Container Flex-Row">
+                    <div className="TabControl-Buttons Centered-Container Flex-Row" ref={TabControlRef}>
                         <button className={CurrentInfoTab === "Details" ? "Selected" : ""}
                                 onClick={() => handleSelectSection("Details")}>
-                            Dellates
+                            Detalles
                         </button>
 
                         <button className={CurrentInfoTab === "Rules" ? "Selected" : ""}
@@ -98,7 +100,8 @@ export const Home = () => {
                     </div>
 
                     {/* Section that contain the infor of each tab */}
-                    <section className="TabControl-Content" ref={TabControl}>
+                    <section className="TabControl-Content" ref={TabContentRef}>
+                        {/* General contest details section */}
                         <div className="TabContent-Details">
 
                             <article>
@@ -117,9 +120,11 @@ export const Home = () => {
                                             <div className="Logo-Container"><img src={ImgGrgeLogo} className="Logo" alt="GRGE logo"/></div>
                                         </div>
 
-                                        <p>Mi nombre es GRGE, Soy DJ y Productor mexicano que tambien ama hacer videos para YouTube.</p>
-                                        <p>Me metí en la música cuando tenía 6 años, mi padre me regaló un teclado por mi cumpleaños, desde ese entonces me enamoré de él, solía tocar todos los días, practicar cada canción que venía en él. Pocos años después comencé a interesarme en la Dance Music, recuerdo escuchar los casetes de mi padre, Kraftwerk, Afrika Bambaataa, Salt-N-Peppa, 2 Unlimited, y todas esas cosas antiguas.</p>
-                                        <p>Cuando me convertí en adolescente mi mejor amiga me prestó su reproductor de MP3, tenía musica Trance y Psytrance, disfruté mucho escuchar ese tipo de música y le pedí que me la pasara en un disco en blanco, desde ese día super que la Música Electrónica era lo mío.</p>
+                                        <p>GRGE (Yoryi): Productor musical, DJ, y creador de contenido, originario de Tijuana, México.</p>
+                                        <p>Su discografía se caracteriza por tener una esencia nostálgica, pues entre sus lanzamientos se pueden apreciar desde sintetizadores analógicos, sonidos chiptune, leads espaciales, hasta pads etéreos que evocan la música dance de los 90s.</p>
+                                        <p>En 2016 inició actividad en su canal de YouTube donde comenzó subiendo tutoriales de producción musical, principalmente enfocados en la música electrónica, mismos donde hasta el día de hoy ha enseñado cómo hacer 57 géneros musicales.</p>
+                                        <p>En 2017 se convirtió en el segundo artista mexicano en pertenecer a la lista oficial de Power Users (Usuarios Destacados) de FL Studio, uno de los DAW más populares del mundo.</p>
+                                        <p>En la actualidad es embajador de grandes compañías desarrolladoras de software/hardware como Image-Line (FL Studio), Native Instruments, y Arturia.</p>
                                     </article>
                                 </div>
 
@@ -144,27 +149,40 @@ export const Home = () => {
                         {/* Contest rules and points to grade tab */}
                         <div className="TabContent-Rules">
                             <article>
-                                <h1>Reglas</h1>                                    
+                                <h1>Bases</h1>
 
-                                <ol>
-                                    <li>El periodo de entrega es del 1.- de Mayo de 2024 y finaliza el 1.- de Junio de 2024.</li>
-                                    <li>La duración total de la canción deberá superar los 2 minutos y no debe exceder los 4 minutos.</li>
-                                    <li>Se deberá usar al menos el 50% de la acapella.</li>
-                                    <li>Se deberá enviar el audio en formato wav.</li>
-                                    <li>El remix puede ser de cualquier genero a su elección.</li>
-                                    <li>Solo se puede enviar un remix por participante y de manera individual.</li>
+                                <ol className="Bases-List">
+                                    <li><strong>3 de Mayo:</strong> Se otorgan stems (pistas) específicos del tema original para que puedan llevar a cabo el remix.</li>
+                                    <li><strong>3 de Mayo - 3 de Junio:</strong> Periodo de entrega.</li>
+                                    <li><strong>4 de Junio - 7 de Junio:</strong> Periodo de evaluación.</li>
+                                    <li><strong>8 de Junio:</strong> Se anuncian los ganadores.</li>
+                                </ol>
+                            </article>
+
+                            <article>
+                                <h2>Reglas</h2>                                    
+
+                                <ol ClassName="Rules-List">
+                                    <li>Solamente una participación por artista/dúo/grupo.</li>
+                                    <li>El Remix deberá tener como mínimo una duración de 2 minutos con 30 segundos, y máximo una duración de 5 minutos con 0 segundos.</li>
+                                    <li>Ningún Remix se podrá subir a ninguna plataforma durante el periodo de entrega.</li>
+                                    <li>Ningún Remix deberá contener material de otros artistas (sampling) más que el de los stems proporcionados.</li>
+                                    <li>Prohibido utilizar los stems proporcionados para material distribuido en plataformas digitales.</li>
+                                    <li>El periodo de entrega inicia el 3 de Mayo a las 7:00 PM PT, y termina el 3 de Junio a las 11:59 PM PT.</li>
                                     <li>Los participantes no pueden realizar ningún cambio en su remix después de enviarlo.</li>
-                                    <li>Queda estrictamente prohibido distribuir el remix a plataformas digitales como Spotify, Amazon Music, Deezer, etc.</li>
+                                    <li>Todos los Remixes deberán ser entregados en formato WAV 16Bit.</li>
                                 </ol>
                             </article> 
                             
+                            {/* Contest points to grade section */}
                             <article className="Points-ToGrade">
-                                <h2>Se calificaran los siguientes puntos</h2>
+                                <h3>Evaluación</h3>
+                                <p className="Title">Durante el periodo de evaluación se estará calificando lo siguiente:</p>
 
                                 <div className="Flex-Wrap Graphics">
                                     <div>
-                                        <div className="Image-Container"><img src={ImgMixMaster} alt="Mezcla y Master"/></div>
-                                        <p>Mecla y masterización</p>
+                                        <div className="Image-Container"><img src={ImgAcapella} alt="Mezcla y Master"/></div>
+                                        <p>Uso del 50% de la acapella</p>
                                     </div>
 
                                     <div>
@@ -173,24 +191,31 @@ export const Home = () => {
                                     </div>
 
                                     <div>
-                                        <div className="Image-Container"><img src={ImgComposition} alt="Composición"/></div>
+                                        <div className="Image-Container"><img src={ImgComposition} alt="Composición musical"/></div>
                                         <p>Composición musical</p>
                                     </div>
 
                                     <div>
-                                        <div className="Image-Container"><img src={ImgSoundChoice} alt="Elección de sonidos"/></div>
-                                        <p>Elección de sonidos</p>
+                                        <div className="Image-Container"><img src={ImgMixMaster} alt="Mezcla y Master"/></div>
+                                        <p>Mezcla y masterización</p>
+                                    </div>
+
+                                    <div>
+                                        <div className="Image-Container"><img src={ImgEstructure} alt="Estructura musical"/></div>
+                                        <p>Estructura</p>
                                     </div>
                                 </div>
                             </article>
                         </div>
 
-                        <div className="TabContent-Prizes">
-                            <h1>Premios</h1>                            
-                        </div>
-
                         <div className="TabContent-Resources">
                             <h1>Recursos</h1>
+                            <p>Tonalidad: Re menor / Dm</p>
+                            <p>Velocidad: 150 BPM</p>
+
+                            <div className="Centered-Container">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" className="Convencional-Button">Enviar demo</a>
+                            </div>
                         </div>
                     </section>
                 </div>

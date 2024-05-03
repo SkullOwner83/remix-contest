@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ImgGrge from "../Images/Grge.gif";
-import SndNokiaArabic from "../Nokia Arabic.mp3";
+import SndNokiaArabic from "../Sounds/Nokia Arabic.mp3";
 
 export const NoPage = () => {
     useEffect(() => {
