@@ -1,8 +1,8 @@
 //Styles for convencional buttons
-@mixin Convencional-Button() {
+@mixin Convencional-Button($Color: $PrimaryColor) {
     font-size: $FontSize;
     color: $White;
-    background-color: $PrimaryColor;
+    background-color: $Color;
     
     padding: 0.6rem 2rem;
     border-radius: $MinRadius;
@@ -15,6 +15,16 @@
 
 .Convencional-Button {
     @include Convencional-Button();
+}
+
+@mixin Outline-Button($Color: $PrimaryColor) {
+    @include Convencional-Button();
+    background-color: transparent;
+    border: 2px solid $Color;
+}
+
+.Outline-Button {
+    @include Outline-Button();
 }
 
 //Styles for buttons that mantain pressed as mechanical

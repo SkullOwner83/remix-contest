@@ -9,7 +9,6 @@ import SndOrchHit from "../Sounds/Orch Hit.wav";
 import SndVocal from "../Sounds/Vocal.wav";
 
 import ImgTitle from "../Images/Logos/Isologo.png";
-import ImgOpenSign from "../Images/Gallery/Sign.png";
 import ImgArtwork from "../Images/Gallery/Artwork.jpg";
 import ImgGrge from "../Images/Gallery/GRGE.jpg"
 import ImgBlueLarimar from "../Images/Gallery/Blue Larimar Music.jpg";
@@ -20,7 +19,6 @@ import ImgComposition from "../Images/Illustrations/Composition.svg";
 import ImgEstructure from "../Images/Illustrations/Estructure.svg";
 import ImgGrgeLogo from "../Images/Logos/GRGE.png";
 import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
-import { useLocalStorage } from '../Functions';
 
 
 export const Home = () => {
@@ -72,11 +70,7 @@ export const Home = () => {
                     </div>
                     {/* Send remix button section */}
                     <div className="SendRemix-Container Centered-Container">   
-                        <div className="Image-Container">
-                            <p className="Title">OPEN</p>
-                            <img src={ImgOpenSign}/>
-                        </div>        
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button">Enviar Remix</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button"><strong>ENVIAR REMIX</strong></a>
                     </div>
                 </div>
 
@@ -85,8 +79,9 @@ export const Home = () => {
                     <Timer DueDate={Contest.Date}/>
                 </div>        
 
-                <div className="EndOfBanner-Button">                  
-                    <button className="Convencional-Button" onClick={() => handleScrollToComponent()}>Ver detalles</button>
+                <div className="EndOfBanner-Button">                
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button"><strong>ENVIAR REMIX</strong></a>
+                    <button className="Outline-Button" onClick={() => handleScrollToComponent()}>Ver detalles</button>
                 </div>
             </div>
 
@@ -133,8 +128,8 @@ export const Home = () => {
 
                                         <p>GRGE (Yoryi): Productor musical, DJ, y creador de contenido, originario de Tijuana, México.</p>
                                         <p>Su discografía se caracteriza por tener una esencia nostálgica, pues entre sus lanzamientos se pueden apreciar desde sintetizadores analógicos, sonidos chiptune, leads espaciales, hasta pads etéreos que evocan la música dance de los 90s.</p>
-                                        <p>En 2016 inició actividad en su canal de YouTube donde comenzó subiendo tutoriales de producción musical, principalmente enfocados en la música electrónica, mismos donde hasta el día de hoy ha enseñado cómo hacer 57 géneros musicales.</p>
-                                        <p>En 2017 se convirtió en el segundo artista mexicano en pertenecer a la lista oficial de Power Users (Usuarios Destacados) de FL Studio, uno de los DAW más populares del mundo.</p>
+                                        <p>En 2016 inició actividad en su canal de YouTube donde comenzó subiendo tutoriales de producción musical, principalmente enfocados en la música electrónica.</p>
+                                        <p>En 2017 se convirtió en el segundo artista mexicano en pertenecer a la lista oficial de Power Users (Usuarios Destacados) de FL Studio.</p>
                                         <p>En la actualidad es embajador de grandes compañías desarrolladoras de software/hardware como Image-Line (FL Studio), Native Instruments, y Arturia.</p>
                                     </article>
                                 </div>

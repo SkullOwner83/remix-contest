@@ -103,7 +103,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    background-color: black;
+    background-color: rgba(black, 0.6);
     border-radius: 16px;
     padding: 16px;
     gap: 16px;
@@ -120,7 +120,6 @@
 
         .Logo-Svg {
             fill: white;
-            //transform: translateX(2px);
         }
     }
 
