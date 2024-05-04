@@ -47,16 +47,20 @@
     
             //Artwork of song container
             .Image-Container {
-                //width: 200px;
                 width: 15rem;
                 flex-shrink: 0;
-                transition: 0.5s;
-                @include DebugBorders();    
-
                 margin: 0 auto;
+                transition: 0.5s;
+                @include DebugBorders();
 
                 img {
                     width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                @include ScreenMinHeight(850px) {
+                    width: 12rem;
                 }
             }
         
@@ -67,10 +71,49 @@
             }
         
             //Date count down container
-            .CountDown-Container {
+            .SendRemix-Container {
                 width: 15rem;
-                flex-shrink: 0;
+                height: 15rem;
+                justify-content: space-between;
                 @include DebugBorders();
+                position: relative;
+
+                .Image-Container {
+                    width: 100%;
+                    height: 70%;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain; 
+                    }
+
+                    p {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -75%);
+                        animation: Glow 3s infinite;
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
+                }
+
+                @keyframes Glow {
+                    0% {
+                        text-shadow: 0 0 10px $SecondaryColor;
+                    }
+                    50% {
+                        text-shadow: 0 0 30px $SecondaryColor;
+                    }
+                    100% {
+                        text-shadow: 0 0 10px $SecondaryColor;
+                    }
+                }
+
+                a {
+                    width: 100%;
+                }
 
                 @include ScreenMinWidth(1200px) {
                     display: none;
@@ -99,6 +142,7 @@
         @include Centered-Container();
         justify-content: start;
 
+        //Tabcontrol navigation buttons
         .TabControl-Buttons {
             position: sticky;        
             margin-bottom: $SectionSeparation;
@@ -115,6 +159,7 @@
             }
         }
 
+        //Tabcontrol content styles
         .TabControl-Content {
             & > div {
                 display: none;
@@ -130,7 +175,8 @@
             }
         }
     
-        .About-Us {
+        //About us content section
+        .TabContent-AboutUs {
             @include Grid-Wrap(300px, 64px);
             
             .Image-Container {
@@ -163,6 +209,7 @@
             }
         }
 
+        //Resources content section    
         .TabContent-Resources {
             .Stems-Waveform {
                 margin-bottom: $SectionSeparation;

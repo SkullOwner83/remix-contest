@@ -115,11 +115,12 @@
         background-color: transparent;
         border-radius: 100%;
         border: 3px solid white;
-        padding: 16px;
+        padding: 12px;
         cursor: pointer;
 
-        img {
+        .Logo-Svg {
             fill: white;
+            //transform: translateX(2px);
         }
     }
 

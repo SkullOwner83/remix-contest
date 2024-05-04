@@ -4,7 +4,7 @@
     color: $White;
     background-color: $PrimaryColor;
     
-    padding: 8px;
+    padding: 0.6rem 2rem;
     border-radius: $MinRadius;
     border-style: none;
 
@@ -48,7 +48,7 @@
         flex-grow: 1;
         font-size: $FontSize;
         color: $White;
-        padding: 8px;
+        padding: 0.6rem 2rem;
         cursor: pointer;
 
         background-color: transparent;
@@ -119,9 +119,15 @@
     }
 }
 
+//Styles for the titles or important text
 .Title {
     font-size: 2rem;
     text-align: center;
+
+    @include ScreenMinWidth(500px) {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 }
 
 //Set a solid color as background

@@ -3,21 +3,21 @@ import { useState, useRef } from 'react';
 import {  useLocalStorage, FormatTime } from "../Functions";
 import WaveSurfer from "wavesurfer.js";
 
-import ImgVolume from "../Images/Icons/Volume.svg";
-import ImgMuted from "../Images/Icons/Muted.svg"
-import ImgPlay from "../Images/Icons/Play.svg";
-import ImgPause from "../Images/Icons/Pause.svg";
-import ImgStop from "../Images/Icons/Stop.svg";
+import { ReactComponent as ImgVolume } from "../Images/Icons/Volume.svg";
+import { ReactComponent as ImgMuted } from "../Images/Icons/Muted.svg"
+import { ReactComponent as ImgPlay } from "../Images/Icons/Play.svg";
+import { ReactComponent as ImgPause } from "../Images/Icons/Pause.svg";
+import { ReactComponent as ImgStop } from "../Images/Icons/Stop.svg";
 
 export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
     const WaveFormRef = useRef(null);
-    const WaveFrom = useRef(null);
+    const ObjWaveFrom = useRef(null);
     const [Playing, SetPlaying] = useState(false);
-    const [Volume, SetVolume] = useLocalStorage("Volume", "0.5");
     const [Paused, SetPaused] = useState(false);
     const [Muted, SetMuted] = useState(false);
     const [Duration, SetDuration] = useState(0);
     const [CurrenTime, SetCurrentTime] = useState(0);
+    const [Volume, SetVolume] = useLocalStorage(`Volume-${AudioName}`, "0.5");
 
     //Waveform audio configuration
     const WaveConfig = () => ({
@@ -45,26 +45,30 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
     //Initialize WaveSurfer and set up event listeners
     useEffect(() => {
         //Create WaveSurfer instance with previous configuration
-        WaveFrom.current = WaveSurfer.create(WaveConfig());
+        ObjWaveFrom.current = WaveSurfer.create(WaveConfig());
     
         //Set the volume and duration state, when the WaveSurfer is ready
-        WaveFrom.current.on("ready", () => {
-            WaveFrom.current.setVolume(Volume);
-            SetDuration(WaveFrom.current.getDuration());
+        ObjWaveFrom.current.on("ready", () => {
+            ObjWaveFrom.current.setVolume(Volume);
+            SetDuration(ObjWaveFrom.current.getDuration());
         })
 
         //Update current time in state as audio plays
-        WaveFrom.current.on("audioprocess", () => {
-            SetCurrentTime(WaveFrom.current.getCurrentTime());
+        ObjWaveFrom.current.on("audioprocess", () => {
+            SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
         })
 
         //Clean up event listeners and destroy instance on unmount
         return () => {
-            WaveFrom.current.un("audioprocess");
-            WaveFrom.current.un("ready");
-            WaveFrom.current.destroy();
+            ObjWaveFrom.current.un("audioprocess");
+            ObjWaveFrom.current.un("ready");
+            ObjWaveFrom.current.destroy();
         };
     }, []);
+
+    useEffect(() => {
+
+    });
     
     //Function to control the playing state of the song
     const handleControls = (Parameter) => {
@@ -73,45 +77,51 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
             case "Play":
                 SetPlaying(true);
                 SetPaused(false);
-                WaveFrom.current.play();
+                ObjWaveFrom.current.play();
                 break;
 
             case "Stop":
                 SetPlaying(false);
                 SetPaused(false);
-                WaveFrom.current.stop();
+                ObjWaveFrom.current.stop();
                 break;
 
             case "Pause":
                 SetPlaying(false);
                 SetPaused(true);
-                WaveFrom.current.pause();
+                ObjWaveFrom.current.pause();
                 break;
 
             case "Mute":
                 SetMuted(!Muted);
-                WaveFrom.current.setVolume(Muted ? Volume : 0);
+                ObjWaveFrom.current.setVolume(Muted ? Volume : 0);
+                break;
+
+            case "TogglePlayback":
+                if (!Playing) {
+                    SetPlaying(true);
+                    SetPaused(false);
+                    ObjWaveFrom.current.play();
+                } else {
+                    SetPlaying(false);
+                    SetPaused(true);
+                    ObjWaveFrom.current.pause();
+                }
                 break;
 
             default: return;
         }
     }
 
+    useEffect(() => {
+        ObjWaveFrom.current.setVolume(Volume);
+    }, [Volume]);
+
     //Adjust audio volume
     const handleVolumeChange = (NewVolume) => {
         SetVolume(NewVolume);
-        WaveFrom.current.setVolume(NewVolume);
+        ObjWaveFrom.current.setVolume(NewVolume);
         SetMuted(NewVolume === 0);
-    }
-
-    //Increase volume by 10%
-    const handleVolumeUp = () => {
-        handleVolumeChange(Math.min(Volume + 0.1, 1));
-    }
-
-    //Decrease volume by 10%
-    const handleVolumeDown = () => {
-        handleVolumeChange(Math.max(Volume - 0.1, 0));
     }
 
     if (!Simple) {
@@ -124,7 +134,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
                 <div className="Controls-Container">
                     {/* Volume of song section */}
                     <div className="Volume-Container">
-                        <button onClick={() => handleControls("Mute")}><img src={ Muted ? ImgMuted : ImgVolume } alt="Control de columen"/></button> 
+                        <button onClick={() => handleControls("Mute")}>{ Muted ? <ImgMuted/> : <ImgVolume/> }</button> 
 
                         <input
                             type="range"
@@ -142,16 +152,16 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
 
                     {/* Control of song buttons section */}
                     <div className="Buttons-Container Centered-Container Flex-Row">
-                        <button onClick={() => handleControls("Stop")}><img src={ImgStop} alt="Control de parar"/></button>
+                        <button onClick={() => handleControls("Stop")}><ImgStop/></button>
 
                         <button onClick={() => handleControls("Play")} 
                                 className={Playing ? "Pressed" : ""}>
-                            <img src={ImgPlay} alt="Control de reproducción"/>
+                            <ImgPlay/>
                         </button>
 
                         <button onClick={() => handleControls("Pause")} 
                                 className={Paused ? "Pressed" : ""}>
-                            <img src={ImgPause} alt="Control de pausa"/>
+                            <ImgPause/>
                         </button>
                     </div>
 
@@ -169,7 +179,10 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
         //Simple waveform component render
         return(
             <div className="SimpleWaveForm-Container">
-                <button className="Play-Button"><img src={ImgPlay}/></button>
+                <button className="Play-Button" onClick={() => handleControls("TogglePlayback")}>
+                    {!Playing ? <ImgPlay className="Logo-Svg"/> : <ImgPause className="Logo-Svg"/>}
+                </button>
+
                 <div>
                     <p>{AudioName}</p>
                     <div id="WaveForm" ref={WaveFormRef}/>

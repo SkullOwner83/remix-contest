@@ -9,6 +9,7 @@ import SndOrchHit from "../Sounds/Orch Hit.wav";
 import SndVocal from "../Sounds/Vocal.wav";
 
 import ImgTitle from "../Images/Logos/Isologo.png";
+import ImgOpenSign from "../Images/Gallery/Sign.png";
 import ImgArtwork from "../Images/Gallery/Artwork.jpg";
 import ImgGrge from "../Images/Gallery/GRGE.jpg"
 import ImgBlueLarimar from "../Images/Gallery/Blue Larimar Music.jpg";
@@ -19,6 +20,7 @@ import ImgComposition from "../Images/Illustrations/Composition.svg";
 import ImgEstructure from "../Images/Illustrations/Estructure.svg";
 import ImgGrgeLogo from "../Images/Logos/GRGE.png";
 import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
+import { useLocalStorage } from '../Functions';
 
 
 export const Home = () => {
@@ -68,8 +70,12 @@ export const Home = () => {
                     <div className="WaveForm-Container">
                         <WaveForm AudioFile={SndMusic} AudioName={Contest.SongName}/>
                     </div>
-                    {/* Count down and entry button section */}
-                    <div className="CountDown-Container Centered-Container">                
+                    {/* Send remix button section */}
+                    <div className="SendRemix-Container Centered-Container">   
+                        <div className="Image-Container">
+                            <p className="Title">OPEN</p>
+                            <img src={ImgOpenSign}/>
+                        </div>        
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button">Enviar Remix</a>
                     </div>
                 </div>
@@ -79,7 +85,7 @@ export const Home = () => {
                     <Timer DueDate={Contest.Date}/>
                 </div>        
 
-                <div className="EndOfBanner-Button">                    
+                <div className="EndOfBanner-Button">                  
                     <button className="Convencional-Button" onClick={() => handleScrollToComponent()}>Ver detalles</button>
                 </div>
             </div>
@@ -116,7 +122,7 @@ export const Home = () => {
                                 <p className="Title">Los 5 mejores remixes formarán parte del <strong>EP oficial de “Sólo Tú”</strong>, mismo que se estará subiendo a los canales de GRGE y Blue Larimar Music.</p>
                             </article>
 
-                            <div className="About-Us Grid-Wrap">
+                            <div className="TabContent-AboutUs Grid-Wrap">
                                 {/* GRGE Music section */}
                                 <div>
                                     <article>
@@ -232,7 +238,7 @@ export const Home = () => {
                             </div>
 
                             <div className="Centered-Container">
-                                <a href="#" target="Blank" className="Convencional-Button">Descargar Stems</a>
+                                <a href="https://drive.usercontent.google.com/download?id=1XztfHZ91hQQLUOfLYIct_UDDxw8qQwRX&export=download&authuser=0&confirm=t&uuid=d2cab3a8-21fa-4267-a3d6-9df2de0cb08a&at=APZUnTWjWtgtC_8tzQiwL2wE1rgs:1714805330566" target="Blank" className="Convencional-Button">Descargar Stems</a>
                             </div>
                         </div>
                     </section>
