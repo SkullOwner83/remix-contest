@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Timer } from "../Components/Timer";
 import { WaveForm } from "../Components/WaveForm";
+import { ScrollToComponent } from "../Functions";
+import { Link } from "react-router-dom";
+
 import SndMusic from "../Sounds/Solo tu.mp3";
 import SndBassline from "../Sounds/Bassline.wav";
 import SndChords from "../Sounds/Chords.wav";
@@ -20,17 +23,18 @@ import ImgEstructure from "../Images/Illustrations/Estructure.svg";
 import ImgGrgeLogo from "../Images/Logos/GRGE.png";
 import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
 
-
 export const Home = () => {
     const Contest = {
         SongName: "Blue Larimar Music & GRGE - Solo Tú",
         Date: "June 3, 2024 21:00:00"
     }
 
-    const [CurrentInfoTab, SetCurrentInfoTab] = useState("Details");
+    const [EndOfContest, SetEndOfContest] = useState(false);
+    const [CurrentTab, SetCurrentTab] = useState("Details");
     const TabControlRef = useRef(null);
     const TabContentRef = useRef(null);
 
+    //Show the corresponding tab content
     useEffect(() => {
         //Get all first childs of tabcontrol and save it a list
         const TabsContent = Array.from(TabContentRef.current.querySelectorAll("& > div"));
@@ -39,20 +43,24 @@ export const Home = () => {
         TabsContent.forEach(Element => {
             Element.classList.remove("Show-Tab");
 
-            if (Element.classList.contains(`TabContent-${CurrentInfoTab}`)) {
+            if (Element.classList.contains(`TabContent-${CurrentTab}`)) {
                 Element.classList.add("Show-Tab");
             }
         });
-    }, [CurrentInfoTab])
+    }, [CurrentTab])
 
-    function handleSelectSection(Section) {
-        SetCurrentInfoTab(Section);
+    //Show the send remix button if the contest is still open or show the results button when the contest has ended
+    const SendRemixButton = () => {
+        if (!EndOfContest) {
+            return( <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button"><strong>ENVIAR REMIX</strong></a> );
+        } else {
+            return( <Link to="resultados" className="Convencional-Button"><strong>VER RESULTADOS</strong></Link> );
+        }
     }
+
+    function handleSelectTab(Section) { SetCurrentTab(Section); }
+    function handleEndOfContest() { SetEndOfContest(true); }
     
-    function handleScrollToComponent() {
-        TabControlRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
     //HTML section
     return (
         <div className="Home-Page">
@@ -70,18 +78,18 @@ export const Home = () => {
                     </div>
                     {/* Send remix button section */}
                     <div className="SendRemix-Container Centered-Container">   
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button"><strong>ENVIAR REMIX</strong></a>
+                        <SendRemixButton/>
                     </div>
                 </div>
 
                 {/* Coundown date section */}
                 <div className="CountDown-Container">
-                    <Timer DueDate={Contest.Date}/>
+                    <Timer DueDate={Contest.Date} onEndOfContest={handleEndOfContest}/>
                 </div>        
 
                 <div className="EndOfBanner-Button">                
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrPLEYrMz8zjsCI6fFEz8DlLWa7FzE57ZjYxI3yveV6-VFSw/viewform?usp=sf_link" target="Blank" className="Convencional-Button"><strong>ENVIAR REMIX</strong></a>
-                    <button className="Outline-Button" onClick={() => handleScrollToComponent()}>Ver detalles</button>
+                    <button className="Outline-Button" onClick={() => ScrollToComponent(TabControlRef)}>Ver detalles</button>
                 </div>
             </div>
 
@@ -89,18 +97,18 @@ export const Home = () => {
                 <div className="Main-Background">
                     {/* Tabcontrol navigate buttons */}
                     <div className="TabControl-Buttons Centered-Container Flex-Row" ref={TabControlRef}>
-                        <button className={CurrentInfoTab === "Details" ? "Selected" : ""}
-                                onClick={() => handleSelectSection("Details")}>
+                        <button className={CurrentTab === "Details" ? "Selected" : ""}
+                                onClick={() => handleSelectTab("Details")}>
                             Detalles
                         </button>
 
-                        <button className={CurrentInfoTab === "Rules" ? "Selected" : ""}
-                                onClick={() => handleSelectSection("Rules")}>
+                        <button className={CurrentTab === "Rules" ? "Selected" : ""}
+                                onClick={() => handleSelectTab("Rules")}>
                             Reglas
                         </button>                    
 
-                        <button className={CurrentInfoTab === "Resources" ? "Selected" : ""}
-                                onClick={() => handleSelectSection("Resources")}>
+                        <button className={CurrentTab === "Resources" ? "Selected" : ""}
+                                onClick={() => handleSelectTab("Resources")}>
                             Recursos
                         </button>
                     </div>
@@ -158,8 +166,8 @@ export const Home = () => {
                                 <h1>Bases</h1>
 
                                 <ol className="Bases-List">
-                                    <li><strong>3 de Mayo:</strong> Se otorgan stems (pistas) específicos del tema original para que puedan llevar a cabo el remix.</li>
-                                    <li><strong>3 de Mayo - 3 de Junio:</strong> Periodo de entrega.</li>
+                                    <li><strong>4 de Mayo:</strong> Se otorgan stems (pistas) específicos del tema original para que puedan llevar a cabo el remix.</li>
+                                    <li><strong>4 de Mayo - 3 de Junio:</strong> Periodo de entrega.</li>
                                     <li><strong>4 de Junio - 7 de Junio:</strong> Periodo de evaluación.</li>
                                     <li><strong>8 de Junio:</strong> Se anuncian los ganadores.</li>
                                 </ol>
@@ -177,6 +185,8 @@ export const Home = () => {
                                     <li>El periodo de entrega inicia el 3 de Mayo a las 7:00 PM PT, y termina el 3 de Junio a las 11:59 PM PT.</li>
                                     <li>Los participantes no pueden realizar ningún cambio en su remix después de enviarlo.</li>
                                     <li>Todos los Remixes deberán ser entregados en formato WAV 16Bit.</li>
+                                    <li>Se deberá usar almenos el 50% de la acapella. Los demas stems son opcionales.</li>
+                                    <li>El remix puede ser de Cualquier genero a su elección.</li>
                                 </ol>
                             </article> 
                             
@@ -188,7 +198,7 @@ export const Home = () => {
                                 <div className="Flex-Wrap Graphics">
                                     <div>
                                         <div className="Image-Container"><img src={ImgAcapella} alt="Mezcla y Master"/></div>
-                                        <p>Uso del 50% de la acapella</p>
+                                        <p>Uso de la acapella</p>
                                     </div>
 
                                     <div>
@@ -232,9 +242,15 @@ export const Home = () => {
                                 <div><WaveForm AudioFile={SndVocal} AudioName="Vocal" Simple="true"/></div>
                             </div>
 
-                            <div className="Centered-Container">
+                            <div className="DownloadButton-Container">
                                 <a href="https://drive.usercontent.google.com/download?id=1XztfHZ91hQQLUOfLYIct_UDDxw8qQwRX&export=download&authuser=0&confirm=t&uuid=d2cab3a8-21fa-4267-a3d6-9df2de0cb08a&at=APZUnTWjWtgtC_8tzQiwL2wE1rgs:1714805330566" target="Blank" className="Convencional-Button">Descargar Stems</a>
                             </div>
+
+                            <article>
+                                <hr/>
+                                <p className="Centered-Container">Cualquier duda, enviar un correo electrónico a la siguiente dirección:</p>
+                                <p className="Title">info@bluelarimarmusic.com</p>
+                            </article>
                         </div>
                     </section>
                 </div>

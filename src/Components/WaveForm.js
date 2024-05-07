@@ -17,30 +17,38 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
     const [Muted, SetMuted] = useState(false);
     const [Duration, SetDuration] = useState(0);
     const [CurrenTime, SetCurrentTime] = useState(0);
-    const [Volume, SetVolume] = useLocalStorage(`Volume-${AudioName}`, "0.5");
+    const [Volume, SetVolume] = useLocalStorage(`Volume-${AudioName}`, "1");
 
     //Waveform audio configuration
-    const WaveConfig = () => ({
-        container: WaveFormRef.current,
-        url: AudioFile,
-        waveColor: "#FFFF",
-        progressColor: "#389eec",
-        cursorColor: "transparent",
+    const WaveConfig = () => {
+        let Config = {
+            container: WaveFormRef.current,
+            url: AudioFile,
+            waveColor: "#FFFF",
+            progressColor: "#389eec",
+            cursorColor: "transparent",
 
-        backend: "WebAudio",
-        responsive: true,
-        normalize: false,
-        dragToSeek: true,
-        autoplay: false,
-        hideScrollbar: true,
-        autoScroll: true,
+            backend: "WebAudio",
+            responsive: true,
+            normalize: false,
+            dragToSeek: true,
+            autoplay: false,
+            hideScrollbar: true,
+            autoScroll: true,
 
-        width: "auto",
-        height: "auto",
-        barWidth: 3,
-        barRadius: 4,
-        barGap: 0
-    })
+            width: "auto",
+            height: "auto",
+            barWidth: 3,
+            barRadius: 4,
+            barGap: 0
+        };
+
+        if (window.innerWidth < 500) {
+            Config.barWidth = 2;
+        }
+
+        return Config;
+    }
 
     //Initialize WaveSurfer and set up event listeners
     useEffect(() => {
@@ -51,12 +59,12 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
         ObjWaveFrom.current.on("ready", () => {
             ObjWaveFrom.current.setVolume(Volume);
             SetDuration(ObjWaveFrom.current.getDuration());
-        })
+        });
 
-        //Update current time in state as audio plays
-        ObjWaveFrom.current.on("audioprocess", () => {
+        //Update current time in state as audio position changes
+        ObjWaveFrom.current.on("timeupdate", () => {
             SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
-        })
+        });    
 
         //Clean up event listeners and destroy instance on unmount
         return () => {
@@ -65,10 +73,6 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
             ObjWaveFrom.current.destroy();
         };
     }, []);
-
-    useEffect(() => {
-
-    });
     
     //Function to control the playing state of the song
     const handleControls = (Parameter) => {
@@ -84,6 +88,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
                 SetPlaying(false);
                 SetPaused(false);
                 ObjWaveFrom.current.stop();
+                SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
                 break;
 
             case "Pause":
@@ -113,11 +118,12 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
         }
     }
 
+    //Set the sound gain when the Volume state changes
     useEffect(() => {
         ObjWaveFrom.current.setVolume(Volume);
     }, [Volume]);
 
-    //Adjust audio volume
+    //Adjust audio volume using controls
     const handleVolumeChange = (NewVolume) => {
         SetVolume(NewVolume);
         ObjWaveFrom.current.setVolume(NewVolume);

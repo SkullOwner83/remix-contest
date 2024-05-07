@@ -33,7 +33,7 @@
         .Song-Container {
             display: flex;
             flex-flow: row;
-            width: 100%;
+            width: 100%;            
             gap: 32px;
                         
             background-color: rgba(black, 0.5);
@@ -48,6 +48,7 @@
             //Artwork of song container
             .Image-Container {
                 width: 15rem;
+                height: 15rem;
                 flex-shrink: 0;
                 margin: 0 auto;
                 transition: 0.5s;
@@ -59,7 +60,7 @@
                     object-fit: contain;
                 }
 
-                @include ScreenMinHeight(850px) {
+                @include ScreenMinHeight(750px) {
                     width: 12rem;
                 }
             }
@@ -79,6 +80,9 @@
 
                 a {
                     width: 100%;
+                    min-height: 3rem;
+                    border-radius: 10px;
+                    @include Centered-Container();
                 }
 
                 @include ScreenMinWidth(1200px) {
@@ -130,6 +134,7 @@
             margin-bottom: $SectionSeparation;
             padding: 0 10%;
             top: 0;
+            z-index: 1000;
             @include ButtonsGroup-Container();
 
             button:not(.Selected) {
@@ -184,7 +189,7 @@
 
             .Logo-Container {
                 width: 100%;
-                height: 64px;
+                height: 4rem;
                 margin-top: 32px;
                 @include DebugBorders(green);
                 @include Centered-Container();
@@ -198,12 +203,16 @@
         //Resources content section    
         .TabContent-Resources {
             .Stems-Waveform {
-                margin-bottom: $SectionSeparation;
-
+                
                 div {
                     width: 100%;
                     max-width: 400px;
                 }
+            }
+            
+            .DownloadButton-Container {
+                margin: $SectionSeparation 0;
+                @include Centered-Container();
             }
         }
     }

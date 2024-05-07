@@ -25,7 +25,7 @@ html {
     font-size: 18px;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1600px) {
     html {
         font-size: 14px;
     }
@@ -56,6 +56,10 @@ main {
 
         p, li {
             font-size: 1.3rem;
+            color: white;
+        }
+
+        hr {
             color: white;
         }
     

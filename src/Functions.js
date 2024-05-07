@@ -1,12 +1,5 @@
 import { useState } from "react";
 
-//Helper function to format time (00:00)
-export function FormatTime(Seconds) {
-    let date = new Date(0);
-    date.setSeconds(Seconds);
-    return date.toISOString().substr(14, 5);
-}
-
 //Custom hook to save a state in the local storage
 export function useLocalStorage(Key, InitialValue) {    
     const [StoredValue, SetStoredValue] = useState(() => {
@@ -34,6 +27,19 @@ export function useLocalStorage(Key, InitialValue) {
     return [StoredValue, SetValue];
 }
 
+//Scroll to component indicated
+export function ScrollToComponent(Ref) {
+    Ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+//Helper function to format time (00:00)
+export function FormatTime(Seconds) {
+    let date = new Date(0);
+    date.setSeconds(Seconds);
+    return date.toISOString().substr(14, 5);
+}
+
+//Add a zero in front of the value if it is less than 10 to ensure it is two digits.
 export function FormatZeroPadding(Value) {
     return Value < 10 ?  `0${Value}` : `${Value}`;
 }

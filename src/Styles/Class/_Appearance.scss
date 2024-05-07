@@ -17,6 +17,7 @@
     @include Convencional-Button();
 }
 
+//Styles for outline buttons
 @mixin Outline-Button($Color: $PrimaryColor) {
     @include Convencional-Button();
     background-color: transparent;
@@ -30,8 +31,10 @@
 //Styles for buttons that mantain pressed as mechanical
 @mixin Mechanic-Button() {
     padding: 0.6rem;
-    box-shadow: 0 4px 0 gray;
-    transform: translateY(-4px);
+    box-shadow: 0 0.3rem 0 gray;
+    transform: translateY(-0.3rem);
+    border-radius: 0;
+    border: 0.0625rem solid gray;
     cursor: pointer;
 
     img {

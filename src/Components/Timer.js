@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { FormatZeroPadding } from "../Functions.js";
 
-export const Timer = ({DueDate}) => {
+export const Timer = ({ DueDate, onEndOfContest }) => {
   const[TimerDays, SetDays] = useState("00");
   const[TimerHours, SetHours] = useState("00");
   const[TimerMinutes, SetMinutes] = useState("00");
@@ -23,9 +23,10 @@ export const Timer = ({DueDate}) => {
       const Minutes = Math.floor((Distance % (1000 * 60 * 60)) / (1000 * 60));
       const Seconds = Math.floor((Distance % (1000 * 60) / 1000));
 
-      //Clean the interval when the count down is finished
+      //Clean the interval when the count down is finished and return the callback
       if (Distance < 0)
       {
+        onEndOfContest(true);
         clearInterval(Interval.current);
       }
       else 
