@@ -9,7 +9,7 @@ import { ReactComponent as ImgPlay } from "../Images/Icons/Play.svg";
 import { ReactComponent as ImgPause } from "../Images/Icons/Pause.svg";
 import { ReactComponent as ImgStop } from "../Images/Icons/Stop.svg";
 
-export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
+export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
     const WaveFormRef = useRef(null);
     const ObjWaveFrom = useRef(null);
     const [Playing, SetPlaying] = useState(false);
@@ -64,7 +64,18 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
         //Update current time in state as audio position changes
         ObjWaveFrom.current.on("timeupdate", () => {
             SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
-        });    
+        });   
+        
+        ObjWaveFrom.current.on("play", () => {
+            SetPlaying(true);
+            SetPaused(false);
+            
+        })
+
+        ObjWaveFrom.current.on("pause", () => {
+            SetPaused(true);
+            SetPlaying(false);
+        })
 
         //Clean up event listeners and destroy instance on unmount
         return () => {
@@ -79,21 +90,16 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
         switch(Parameter) 
         {
             case "Play":
-                SetPlaying(true);
-                SetPaused(false);
                 ObjWaveFrom.current.play();
+                onPlay(ObjWaveFrom.current);
                 break;
 
             case "Stop":
-                SetPlaying(false);
-                SetPaused(false);
                 ObjWaveFrom.current.stop();
                 SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
                 break;
 
             case "Pause":
-                SetPlaying(false);
-                SetPaused(true);
                 ObjWaveFrom.current.pause();
                 break;
 
@@ -104,12 +110,9 @@ export const WaveForm = ({ AudioFile, AudioName, Simple }) => {
 
             case "TogglePlayback":
                 if (!Playing) {
-                    SetPlaying(true);
-                    SetPaused(false);
                     ObjWaveFrom.current.play();
+                    onPlay(ObjWaveFrom.current);
                 } else {
-                    SetPlaying(false);
-                    SetPaused(true);
                     ObjWaveFrom.current.pause();
                 }
                 break;

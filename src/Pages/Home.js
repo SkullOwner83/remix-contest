@@ -34,6 +34,15 @@ export const Home = () => {
     const TabControlRef = useRef(null);
     const TabContentRef = useRef(null);
 
+    const lastPlayedRef = useRef(null);
+
+    const handlePlay = (wavesurfer) => {
+        if (lastPlayedRef.current && lastPlayedRef.current !== wavesurfer) {
+        lastPlayedRef.current.pause();
+        }
+        lastPlayedRef.current = wavesurfer;
+    };
+
     //Show the corresponding tab content
     useEffect(() => {
         //Get all first childs of tabcontrol and save it a list
@@ -59,7 +68,7 @@ export const Home = () => {
     }
 
     function handleSelectTab(Section) { SetCurrentTab(Section); }
-    function handleEndOfContest() { SetEndOfContest(true); }
+    function handleEndOfContest(Value) { SetEndOfContest(Value); }
     
     //HTML section
     return (
@@ -74,7 +83,7 @@ export const Home = () => {
                     <div className="Image-Container"><img src={ImgArtwork} alt="Portada de la canción"/></div>
                     {/* Waveform of and information of song section */}
                     <div className="WaveForm-Container">
-                        <WaveForm AudioFile={SndMusic} AudioName={Contest.SongName}/>
+                        <WaveForm AudioFile={SndMusic} AudioName={Contest.SongName} onPlay={handlePlay}/>
                     </div>
                     {/* Send remix button section */}
                     <div className="SendRemix-Container Centered-Container">   
@@ -235,11 +244,11 @@ export const Home = () => {
 
                             {/* Song stems containers */}
                             <div className="Stems-Waveform Flex-Wrap">
-                                <div><WaveForm AudioFile={SndBassline} AudioName="Bassline" Simple="true"/></div>
-                                <div><WaveForm AudioFile={SndChords} AudioName="Chords" Simple="true"/></div>
-                                <div><WaveForm AudioFile={SndGuitar} AudioName="Guitar" Simple="true"/></div>
-                                <div><WaveForm AudioFile={SndOrchHit} AudioName="Orchestral hit" Simple="true"/></div>
-                                <div><WaveForm AudioFile={SndVocal} AudioName="Vocal" Simple="true"/></div>
+                                <div><WaveForm AudioFile={SndBassline} AudioName="Bassline" Simple="true" onPlay={handlePlay}/></div>
+                                <div><WaveForm AudioFile={SndChords} AudioName="Chords" Simple="true" onPlay={handlePlay}/></div>
+                                <div><WaveForm AudioFile={SndGuitar} AudioName="Guitar" Simple="true" onPlay={handlePlay}/></div>
+                                <div><WaveForm AudioFile={SndOrchHit} AudioName="Orchestral hit" Simple="true" onPlay={handlePlay}/></div>
+                                <div><WaveForm AudioFile={SndVocal} AudioName="Vocal" Simple="true" onPlay={handlePlay}/></div>
                             </div>
 
                             <div className="DownloadButton-Container">
