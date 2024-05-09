@@ -5,8 +5,12 @@
     height: 15rem;
     font-size: 1.3rem;    
 
+    @include ScreenMinHeight(650px) {
+        height: 12rem;    
+    }
+
     @include ScreenMinWidth(500px) {
-        height: 11rem;
+        height: 10rem;
     }
 
     //Song title styles
@@ -32,58 +36,58 @@
     .Controls-Container {
         grid-row: 3;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;        
+        grid-template-columns: 35% 30% 35%;        
         margin-top: 16px;  
+
+        &.Show-Volume {
+            grid-template-columns: 100% 0 0;
+        }
 
         button {
             width: 2.5rem;
-            height: 2.5rem;
+            height: 2.5rem;            
         }
 
         //Volume of song section
         .Volume-Container {
             grid-column: 1;
             display: flex;
-            align-items: center;
-            position: relative;
+            justify-content: left;
+            position: relative; 
+            @include DebugBorders(green);
+
+            .Volume-Button {
+                flex-shrink: 0;
+            }
+
+            #Volume-Slider {
+                max-width: 10rem;
+                
+                @include ScreenMinWidth(800px) {
+                    display: none;
+                    
+                    &.Show-Volume {
+                        display: inline;
+                        max-width: none;
+                    }
+                }
+            }
 
             & > :not(:last-child) {
-                margin-right: 16px;
+                margin-right: 1rem;
             }
 
             button {
                 background-color: transparent;
                 border: none;
-                cursor: pointer;
-            }
-
-            input[type="range"] {
-                accent-color: $PrimaryColor;
-
-                // appearance: none;
-                // height: 6px;
-                // background-color: white;   
-                // border-radius: 100px;
-                // margin: 0 16px;
-
-                // &::-webkit-slider-thumb {
-                //     appearance: none;
-                //     width: 16px;
-                //     height: 16px;
-                //     background-color: $PrimaryColor;
-                //     border-radius: 100%;
-                //     user-select: none;
-                // }
-
-                @include ScreenMinWidth(800px) {
-                    display: none;
-                }
+                cursor: pointer
             }
         }
 
         //Control of song buttons section
         .Buttons-Container {
             grid-column: 2;
+            @include DebugBorders(green);
             
             button {
                 @include Mechanic-Button();
@@ -93,7 +97,8 @@
         //Info of song section
         .Audio-Info {
             grid-column: 3;
-            text-align: right;            
+            text-align: right;     
+            @include DebugBorders(green);       
 
             .Duration-Container {
                 @include ScreenMinWidth(800px) {

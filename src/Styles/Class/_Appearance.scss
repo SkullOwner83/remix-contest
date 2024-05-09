@@ -88,6 +88,10 @@
     @include ButtonsGroup-Container();
 }
 
+.Hide-Control {
+    display: none;
+}
+
 //Styles for the cards container with shadow
 .Card-Style {
     background-color: $White;

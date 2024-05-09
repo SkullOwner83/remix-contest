@@ -24,7 +24,7 @@
                 height: 100%;
             }
 
-            @include ScreenMinHeight(750px) {
+            @include ScreenMinHeight(700px) {
                 height: 8rem;
             }
         }
@@ -32,13 +32,12 @@
         //Artwork and waveform song container
         .Song-Container {
             display: flex;
-            flex-flow: row;
-            width: 100%;            
-            gap: 32px;
+            width: 100%;      
+            gap: 2rem;
                         
             background-color: rgba(black, 0.5);
             border-radius: 20px;
-            padding: 32px;
+            padding: 2rem;
             transition: 1s;
 
             @include ScreenMinWidth(1200px) {
@@ -60,8 +59,14 @@
                     object-fit: contain;
                 }
 
-                @include ScreenMinHeight(750px) {
+                @include ScreenMinHeight(650px) {
                     width: 12rem;
+                    height: 12rem;
+                    
+                    @include ScreenMinWidth(500px) {
+                        width: 10rem;
+                        height: 10rem;
+                    }
                 }
             }
         
@@ -69,6 +74,7 @@
             .WaveForm-Container {
                 flex-grow: 1;
                 @include DebugBorders();
+                
             }
         
             //Date count down container
@@ -85,7 +91,17 @@
                     @include Centered-Container();
                 }
 
-                @include ScreenMinWidth(1200px) {
+                @include ScreenMinHeight(650px) {
+                    width: 12rem;
+                    height: 12rem;
+
+                    @include ScreenMinWidth(500px) {
+                        width: 10rem;
+                        height: 10rem;
+                    }
+                }
+
+                @include ScreenMinWidth(1150px) {
                     display: none;
                 }
             }
@@ -93,7 +109,7 @@
 
         //Set a margin in small resolution to separate the timer to the button
         .CountDown-Container {
-            @include ScreenMinHeight(720px)
+            @include ScreenMinHeight(650px)
             {
                 margin-bottom: 2.5rem;
             }
@@ -103,7 +119,7 @@
             a {
                 display: none;
 
-                @include ScreenMinWidth(1200px) {
+                @include ScreenMinWidth(1100px) {
                     display: inline;
                 }
             }
@@ -113,7 +129,7 @@
                 min-width: 15rem;
                 backdrop-filter: blur(20px);
 
-                @include ScreenMinWidth(1200px) {
+                @include ScreenMinWidth(1100px) {
                     display: none;
                 }
             }

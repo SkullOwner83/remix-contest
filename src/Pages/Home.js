@@ -33,15 +33,7 @@ export const Home = () => {
     const [CurrentTab, SetCurrentTab] = useState("Details");
     const TabControlRef = useRef(null);
     const TabContentRef = useRef(null);
-
-    const lastPlayedRef = useRef(null);
-
-    const handlePlay = (wavesurfer) => {
-        if (lastPlayedRef.current && lastPlayedRef.current !== wavesurfer) {
-        lastPlayedRef.current.pause();
-        }
-        lastPlayedRef.current = wavesurfer;
-    };
+    const LastPlayedRef = useRef(null);
 
     //Show the corresponding tab content
     useEffect(() => {
@@ -66,6 +58,15 @@ export const Home = () => {
             return( <Link to="resultados" className="Convencional-Button"><strong>VER RESULTADOS</strong></Link> );
         }
     }
+
+    //Check if a sound is playing and stop it to play the new sound
+    const handlePlay = (ObjectRef) => {
+        if (LastPlayedRef.current && LastPlayedRef.current !== ObjectRef) {
+            LastPlayedRef.current.pause();
+        } 
+
+        LastPlayedRef.current = ObjectRef;
+    };
 
     function handleSelectTab(Section) { SetCurrentTab(Section); }
     function handleEndOfContest(Value) { SetEndOfContest(Value); }
@@ -185,7 +186,7 @@ export const Home = () => {
                             <article>
                                 <h2>Reglas</h2>                                    
 
-                                <ol ClassName="Rules-List">
+                                <ol className="Rules-List">
                                     <li>Solamente una participación por artista/dúo/grupo.</li>
                                     <li>El Remix deberá tener como mínimo una duración de 2 minutos con 30 segundos, y máximo una duración de 5 minutos con 0 segundos.</li>
                                     <li>Ningún Remix se podrá subir a ninguna plataforma durante el periodo de entrega.</li>

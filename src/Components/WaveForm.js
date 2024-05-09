@@ -8,6 +8,7 @@ import { ReactComponent as ImgMuted } from "../Images/Icons/Muted.svg"
 import { ReactComponent as ImgPlay } from "../Images/Icons/Play.svg";
 import { ReactComponent as ImgPause } from "../Images/Icons/Pause.svg";
 import { ReactComponent as ImgStop } from "../Images/Icons/Stop.svg";
+import { Slider } from './Slider';
 
 export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
     const WaveFormRef = useRef(null);
@@ -20,35 +21,27 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
     const [Volume, SetVolume] = useLocalStorage(`Volume-${AudioName}`, "1");
 
     //Waveform audio configuration
-    const WaveConfig = () => {
-        let Config = {
-            container: WaveFormRef.current,
-            url: AudioFile,
-            waveColor: "#FFFF",
-            progressColor: "#389eec",
-            cursorColor: "transparent",
+    const WaveConfig = () => ({
+        container: WaveFormRef.current,
+        url: AudioFile,
+        waveColor: "#FFFF",
+        progressColor: "#389eec",
+        cursorColor: "transparent",
 
-            backend: "WebAudio",
-            responsive: true,
-            normalize: false,
-            dragToSeek: true,
-            autoplay: false,
-            hideScrollbar: true,
-            autoScroll: true,
+        backend: "WebAudio",
+        responsive: true,
+        normalize: false,
+        dragToSeek: true,
+        autoplay: false,
+        hideScrollbar: true,
+        autoScroll: true,
 
-            width: "auto",
-            height: "auto",
-            barWidth: 3,
-            barRadius: 4,
-            barGap: 0
-        };
-
-        if (window.innerWidth < 500) {
-            Config.barWidth = 2;
-        }
-
-        return Config;
-    }
+        width: "auto",
+        height: "auto",
+        barWidth: 2,
+        barRadius: 4,
+        barGap: 0
+    });
 
     //Initialize WaveSurfer and set up event listeners
     useEffect(() => {
@@ -96,7 +89,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
 
             case "Stop":
                 ObjWaveFrom.current.stop();
-                SetCurrentTime(ObjWaveFrom.current.getCurrentTime());
+                SetPaused(false);
                 break;
 
             case "Pause":
@@ -127,10 +120,26 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
     }, [Volume]);
 
     //Adjust audio volume using controls
-    const handleVolumeChange = (NewVolume) => {
+    function handleVolumeChange(NewVolume) {
         SetVolume(NewVolume);
         ObjWaveFrom.current.setVolume(NewVolume);
         SetMuted(NewVolume === 0);
+    }
+
+    const [ShowVolume, SetShowVolume] = useState(false);
+    const ButtonsRef = useRef(null);
+    const InfoRef = useRef(null);
+
+    function handleShowVolume() {
+        if (ShowVolume) {
+            ButtonsRef.current.classList.remove("Hide-Control");
+            InfoRef.current.classList.remove("Hide-Control");
+        } else {
+            ButtonsRef.current.classList.add("Hide-Control");
+            InfoRef.current.classList.add("Hide-Control");
+        }
+
+        SetShowVolume(!ShowVolume);
     }
 
     if (!Simple) {
@@ -140,19 +149,19 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
                 <p className="Title">{AudioName}</p>
                 <div id="WaveForm" ref={WaveFormRef}/>
 
-                <div className="Controls-Container">
+                <div className={ShowVolume ? "Show-Volume Controls-Container" : "Controls-Container"}>
                     {/* Volume of song section */}
                     <div className="Volume-Container">
-                        <button onClick={() => handleControls("Mute")}>{ Muted ? <ImgMuted/> : <ImgVolume/> }</button> 
-
-                        <input
-                            type="range"
-                            id="volume"
-                            name="volume"
+                        <button className="Volume-Button" onClick={() => {window.innerWidth >= 800 ? handleControls("Mute") : handleShowVolume()}}>{ Muted ? <ImgMuted/> : <ImgVolume/> }</button>
+                        
+                        <Slider
+                            id="Volume-Slider"
                             min="0"
                             max="1"
                             step="0.01"
+                            color="#d737c2"
                             value={Muted ? 0 : Volume}
+                            className={ShowVolume ? "Show-Volume" : ""}
                             onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                         />
 
@@ -160,7 +169,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
                     </div>
 
                     {/* Control of song buttons section */}
-                    <div className="Buttons-Container Centered-Container Flex-Row">
+                    <div className="Buttons-Container Centered-Container Flex-Row" ref={ButtonsRef}>
                         <button onClick={() => handleControls("Stop")}><ImgStop/></button>
 
                         <button onClick={() => handleControls("Play")} 
@@ -175,7 +184,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
                     </div>
 
                     {/* Info of song section */}
-                    <div className="Audio-Info">
+                    <div className="Audio-Info" ref={InfoRef}>
                         <p>
                             <span className="CurrentTime-Container">{FormatTime(CurrenTime)}</span> 
                             <span className="Duration-Container"> / {FormatTime(Duration )}</span>

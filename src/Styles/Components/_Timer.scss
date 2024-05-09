@@ -13,6 +13,10 @@
             text-shadow: 0 0 10px black;
             margin: -0.6rem;
             transition: 0.5s;
+
+            @include ScreenMinWidth(400px) {
+                font-size: 3rem;
+            }
         }
     
         .Title {
