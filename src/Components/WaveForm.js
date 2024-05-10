@@ -13,12 +13,16 @@ import { Slider } from './Slider';
 export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
     const WaveFormRef = useRef(null);
     const ObjWaveFrom = useRef(null);
+    const ButtonsRef = useRef(null);
+    const InfoRef = useRef(null);
+
     const [Playing, SetPlaying] = useState(false);
     const [Paused, SetPaused] = useState(false);
     const [Muted, SetMuted] = useState(false);
     const [Duration, SetDuration] = useState(0);
     const [CurrenTime, SetCurrentTime] = useState(0);
     const [Volume, SetVolume] = useLocalStorage(`Volume-${AudioName}`, "1");
+    const [ToggleVolume, SetToggleVolume] = useState(false);
 
     //Waveform audio configuration
     const WaveConfig = () => ({
@@ -126,12 +130,9 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
         SetMuted(NewVolume === 0);
     }
 
-    const [ShowVolume, SetShowVolume] = useState(false);
-    const ButtonsRef = useRef(null);
-    const InfoRef = useRef(null);
-
-    function handleShowVolume() {
-        if (ShowVolume) {
+    //Show volume slider and hide the playback controls and audio tempo in mobile device
+    function handleToggleVolume() {
+        if (ToggleVolume) {
             ButtonsRef.current.classList.remove("Hide-Control");
             InfoRef.current.classList.remove("Hide-Control");
         } else {
@@ -139,7 +140,7 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
             InfoRef.current.classList.add("Hide-Control");
         }
 
-        SetShowVolume(!ShowVolume);
+        SetToggleVolume(!ToggleVolume);
     }
 
     if (!Simple) {
@@ -149,10 +150,10 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
                 <p className="Title">{AudioName}</p>
                 <div id="WaveForm" ref={WaveFormRef}/>
 
-                <div className={ShowVolume ? "Show-Volume Controls-Container" : "Controls-Container"}>
+                <div className={ToggleVolume ? "Show-Volume Controls-Container" : "Controls-Container"}>
                     {/* Volume of song section */}
                     <div className="Volume-Container">
-                        <button className="Volume-Button" onClick={() => {window.innerWidth >= 800 ? handleControls("Mute") : handleShowVolume()}}>{ Muted ? <ImgMuted/> : <ImgVolume/> }</button>
+                        <button className="Volume-Button" onClick={() => {window.innerWidth >= 800 ? handleControls("Mute") : handleToggleVolume()}}>{ Muted ? <ImgMuted/> : <ImgVolume/> }</button>
                         
                         <Slider
                             id="Volume-Slider"
@@ -161,11 +162,11 @@ export const WaveForm = ({ AudioFile, AudioName, Simple, onPlay }) => {
                             step="0.01"
                             color="#d737c2"
                             value={Muted ? 0 : Volume}
-                            className={ShowVolume ? "Show-Volume" : ""}
+                            className={ToggleVolume ? "Show-Volume" : ""}
                             onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                         />
 
-                        <p>{!Muted ? Math.round(Volume * 100) : 0}%</p>
+                        <p className="Volume-Value">{!Muted ? Math.round(Volume * 100) : 0}%</p>
                     </div>
 
                     {/* Control of song buttons section */}

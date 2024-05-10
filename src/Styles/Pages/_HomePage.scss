@@ -51,6 +51,7 @@
                 flex-shrink: 0;
                 margin: 0 auto;
                 transition: 0.5s;
+                cursor: pointer;
                 @include DebugBorders();
 
                 img {

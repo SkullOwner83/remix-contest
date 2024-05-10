@@ -44,6 +44,7 @@
         }
 
         button {
+            flex-shrink: 0;
             width: 2.5rem;
             height: 2.5rem;            
         }
@@ -57,7 +58,11 @@
             @include DebugBorders(green);
 
             .Volume-Button {
-                flex-shrink: 0;
+                width: 2.5rem;
+                height: 2.5rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer
             }
 
             #Volume-Slider {
@@ -73,14 +78,12 @@
                 }
             }
 
-            & > :not(:last-child) {
-                margin-right: 1rem;
+            .Volume-Value {
+                width: 2.5rem;
             }
 
-            button {
-                background-color: transparent;
-                border: none;
-                cursor: pointer
+            & > :not(:last-child) {
+                margin-right: 1rem;
             }
         }
 

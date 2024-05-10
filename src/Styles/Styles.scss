@@ -2,15 +2,16 @@
 @import "./Settings";
 @import "./Base";
 @import "./Class/_Effects";
-@import "./Class/Behaviors";
-@import "./Class/Appearance";
+@import "./Class/_Behaviors";
+@import "./Class/_Appearance";
 
 //Components styles
-@import "./Components/Header";
-@import "./Components/Footer";
+@import "./Components/_Header";
+@import "./Components/_Footer";
 @import "./Components/_Timer";
-@import "./Components/WaveForm";
-@import "./Components/Slider";
+@import "./Components/_WaveForm";
+@import "./Components/_Slider";
+@import "./Components/_Modal";
 
 //Pages styles
 @import "./Pages/HomePage";

@@ -36,6 +36,9 @@
     background-attachment: fixed;
 }
 
+.Block-Scroll {
+    overflow-y: hidden;
+}
 
 //Container to adjust elements with streched size
 @mixin Grid-Wrap($MinSize: 250px, $Gap: 32px) {
@@ -60,9 +63,4 @@
 
 .Flex-Wrap {
     @include Flex-Wrap();
-}
-
-
-.Header-Spacing {
-    height: $HeaderSize;
 }

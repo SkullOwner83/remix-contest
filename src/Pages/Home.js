@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from "react-router-dom";
 import { Timer } from "../Components/Timer";
 import { WaveForm } from "../Components/WaveForm";
+import { Modal } from '../Components/Modal';
 import { ScrollToComponent } from "../Functions";
-import { Link } from "react-router-dom";
 
 import SndMusic from "../Sounds/Solo tu.mp3";
 import SndBassline from "../Sounds/Bassline.wav";
@@ -31,6 +32,7 @@ export const Home = () => {
 
     const [EndOfContest, SetEndOfContest] = useState(false);
     const [CurrentTab, SetCurrentTab] = useState("Details");
+    const [ToggleModal, SetToggleModal] = useState(false);
     const TabControlRef = useRef(null);
     const TabContentRef = useRef(null);
     const LastPlayedRef = useRef(null);
@@ -60,7 +62,7 @@ export const Home = () => {
     }
 
     //Check if a sound is playing and stop it to play the new sound
-    const handlePlay = (ObjectRef) => {
+    function handlePlay(ObjectRef) {
         if (LastPlayedRef.current && LastPlayedRef.current !== ObjectRef) {
             LastPlayedRef.current.pause();
         } 
@@ -68,12 +70,25 @@ export const Home = () => {
         LastPlayedRef.current = ObjectRef;
     };
 
+    //Show the modal and block the body scroll
+    function handleToggleModal() {            
+        SetToggleModal(!ToggleModal);
+
+        if (!ToggleModal) {
+            document.body.classList.add("Block-Scroll");
+        } else {
+            document.body.classList.remove("Block-Scroll");
+        }
+
+    }
+
     function handleSelectTab(Section) { SetCurrentTab(Section); }
     function handleEndOfContest(Value) { SetEndOfContest(Value); }
     
     //HTML section
     return (
         <div className="Home-Page">
+            <Modal Image={ImgArtwork} className={!ToggleModal ? "Hide-Control" : ""} Alt="Solo Tú - Artwork" onClose={() => handleToggleModal()}/>
             <div className="Background-Page"/>
 
             <div className="Banner-Container Centered-Container">  
@@ -81,11 +96,13 @@ export const Home = () => {
 
                 <div className="Song-Container">
                     {/* Artwork of song section */}
-                    <div className="Image-Container"><img src={ImgArtwork} alt="Portada de la canción"/></div>
+                    <div className="Image-Container" onClick={() => handleToggleModal()}><img src={ImgArtwork} alt="Portada de la canción"/></div>
+                    
                     {/* Waveform of and information of song section */}
                     <div className="WaveForm-Container">
                         <WaveForm AudioFile={SndMusic} AudioName={Contest.SongName} onPlay={handlePlay}/>
                     </div>
+                    
                     {/* Send remix button section */}
                     <div className="SendRemix-Container Centered-Container">   
                         <SendRemixButton/>
