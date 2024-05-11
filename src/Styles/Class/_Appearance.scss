@@ -61,6 +61,7 @@
         flex-grow: 1;
         font-size: $FontSize;
         color: $White;
+        width: 10px;
         padding: 0.6rem 2rem;
         cursor: pointer;
 
@@ -88,26 +89,9 @@
     @include ButtonsGroup-Container();
 }
 
+//Class to hide the control
 .Hide-Control {
     display: none;
-}
-
-//Styles for the cards container with shadow
-.Card-Style {
-    background-color: $White;
-    box-shadow: 0 0 30px $Shadow;
-    border-radius: $MaxRadius;
-    padding: 48px;
-}
-
-//Styles for the circles that surround the icons.
-.Icon-Circle {
-    width: 48px;
-    height: 48px;
-    background-color: $PrimaryColor;
-    border-radius: 100%;
-    padding: 12px;
-    user-select: none;
 }
 
 //Elements with a simple image design
@@ -142,7 +126,7 @@
     text-align: center;
 
     @include ScreenMinWidth(500px) {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: bold;
     }
 }
@@ -165,8 +149,8 @@
 
 //Set static background image 
 @mixin Image-Background($Image: none) {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     z-index: -100;
 

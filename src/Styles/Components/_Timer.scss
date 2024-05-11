@@ -11,7 +11,7 @@
             font-size: 4rem;
             font-weight: bold;        
             text-shadow: 0 0 10px black;
-            margin: -0.6rem;
+            margin: -0.6rem 0rem;
             transition: 0.5s;
 
             @include ScreenMinWidth(400px) {
@@ -23,6 +23,10 @@
             font-weight: normal;
             font-size: 1.3rem;
             text-shadow: 0 0 10px black;
+
+            @include ScreenMinWidth(400px) {
+                font-size: 1rem;
+            }
         }
     }
 
@@ -30,5 +34,9 @@
     span {
         font-size: 4rem;
         margin-top: -1rem;
+
+        @include ScreenMinWidth(400px) {
+            font-size: 3rem;
+        }
     }
 }
