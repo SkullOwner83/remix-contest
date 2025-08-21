@@ -5,7 +5,7 @@ export const Modal = ({ Image, Alt, className, onClose }) => {
     //HTML section
     return (
         <div className={`Modal-Component ${className}`}>
-            <div class="Modal-Overlay" onClick={onClose}/>
+            <div className="Modal-Overlay" onClick={onClose}/>
             <div className="Modal-Content">
                 <img src={Image} alt={Alt}/>
                 <button onClick={onClose}><ImgClose/></button>

@@ -1,7 +1,7 @@
 .Home-Page {
     //Set static background image 
     .Background-Page {
-        @include Image-Background(url(../../Images/Gallery/Banner.png));
+        @include Image-Background(url(../../Images/Gallery/Banner.webp));
     }    
     
     //Presentation content as banner of page
@@ -230,6 +230,13 @@
             .DownloadButton-Container {
                 margin: $SectionSeparation 0;
                 @include Centered-Container();
+            }
+
+            .Contact-Section {
+                a {
+                    color: white;
+                    @include Fx-TurnOn-Light($SecondaryColor);
+                }
             }
         }
     }

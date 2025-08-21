@@ -12,22 +12,22 @@ import SndGuitar from "../Sounds/Guitar.wav";
 import SndOrchHit from "../Sounds/Orch Hit.wav";
 import SndVocal from "../Sounds/Vocal.wav";
 
-import ImgTitle from "../Images/Logos/Isologo.png";
-import ImgArtwork from "../Images/Gallery/Artwork.jpg";
-import ImgGrge from "../Images/Gallery/GRGE.jpg"
-import ImgBlueLarimar from "../Images/Gallery/Blue Larimar Music.jpg";
+import ImgTitle from "../Images/Logos/Isologo.webp";
+import ImgArtwork from "../Images/Gallery/Artwork.webp";
+import ImgGrge from "../Images/Gallery/GRGE.webp"
+import ImgBlueLarimar from "../Images/Gallery/Blue Larimar Music.webp";
 import ImgAcapella from "../Images/Illustrations/Acapella.svg";
 import ImgMixMaster from "../Images/Illustrations/Mix and Master.svg";
 import ImgCreativity from "../Images/Illustrations/Creativity.svg";
 import ImgComposition from "../Images/Illustrations/Composition.svg";
 import ImgEstructure from "../Images/Illustrations/Estructure.svg";
-import ImgGrgeLogo from "../Images/Logos/GRGE.png";
-import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.png";
+import ImgGrgeLogo from "../Images/Logos/GRGE.webp";
+import ImgBlueLarimarLogo from "../Images/Logos/Blue Larimar Music.webp";
 
 export const Home = () => {
     const Contest = {
         SongName: "Blue Larimar Music & GRGE - Solo Tú",
-        Date: "June 3, 2024 21:00:00"
+        Date: "June 4, 2024 00:00:00"
     }
 
     const [EndOfContest, SetEndOfContest] = useState(false);
@@ -79,7 +79,6 @@ export const Home = () => {
         } else {
             document.body.classList.remove("Block-Scroll");
         }
-
     }
 
     function handleSelectTab(Section) { SetCurrentTab(Section); }
@@ -273,10 +272,10 @@ export const Home = () => {
                                 <a href="https://drive.usercontent.google.com/download?id=1XztfHZ91hQQLUOfLYIct_UDDxw8qQwRX&export=download&authuser=0&confirm=t&uuid=d2cab3a8-21fa-4267-a3d6-9df2de0cb08a&at=APZUnTWjWtgtC_8tzQiwL2wE1rgs:1714805330566" target="Blank" className="Convencional-Button">Descargar Stems</a>
                             </div>
 
-                            <article>
+                            <article className="Contact-Section Centered-Container">
                                 <hr/>
                                 <p className="Centered-Container">Cualquier duda, enviar un correo electrónico a la siguiente dirección:</p>
-                                <p className="Title">info@bluelarimarmusic.com</p>
+                                <a className="Title" href="mailto:info@bluelarimarmusic.com">info@bluelarimarmusic.com</a>
                             </article>
                         </div>
                     </section>
